@@ -1,0 +1,24 @@
+{
+  "name": "cs313_node_js_project",
+  "version": "1.0.0",
+  "description": "This is the repository for the project of week 10 of my cs313 class.",
+  "main": "milestone_1_server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/emilianomassai/cs313_Node_js_Project.git"
+  },
+  "author": "Emiliano Massai",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/emilianomassai/cs313_Node_js_Project/issues"
+  },
+  "homepage": "https://github.com/emilianomassai/cs313_Node_js_Project#readme",
+  "dependencies": {
+    "ejs": "^3.1.5",
+    "express": "^4.17.1",
+    "pg": "^8.5.1"
+  }
+}
