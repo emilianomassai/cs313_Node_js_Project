@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Messenger Sign-in</title>
+  </head>
+
+  <body>
+    <div>
+      <img
+        src="#"
+        alt="messenger_icon"
+        id="messenger_icon"
+        width="300"
+        height="300"
+      />
+
+      <h1>Please sign in below:</h1>
+      <br />
+      <form id="mainForm" action="signIn.php" method="POST">
+        <label for="txtUser"> Username </label>
+        <input type="text" id="txtUser" name="txtUser" placeholder="Username" />
+
+        <label for="txtPassword"> Password </label>
+        <input
+          type="password"
+          id="txtPassword"
+          name="txtPassword"
+          placeholder="Password"
+        />
+        <br />
+        <br />
+        <br />
+        <button type="submit">Sign In</button>
+      </form>
+
+      <a href="signUp.php">Sign up - New Account</a>
+    </div>
+  </body>
+</html>

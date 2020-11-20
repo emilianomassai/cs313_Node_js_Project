@@ -16,6 +16,8 @@ app.set("port", process.env.PORT || 5000);
 
 app.get("/getUser", getUser);
 
+app.get("/", "./public/sign_in.html");
+
 // folder where all the static files live
 app.use(express.static("public"));
 
