@@ -1,22 +1,22 @@
 var express = require("express");
 var app = express();
 
-// // say to the program what kind of database will be used
-// const { Pool } = require("pg");
+// say to the program what kind of database will be used
+const { Pool } = require("pg");
 
-// // set the database URL (using Heroku, we can just set it to the environment
-// // variable)
-// const connectionString = process.env.DATABASE_URL;
+// set the database URL (using Heroku, we can just set it to the environment
+// variable)
+const connectionString = process.env.DATABASE_URL;
 
-// // establish the connection to the data source, passing all the data with json:
-// const pool = new Pool({ connectionString: connectionString });
+// establish the connection to the data source, passing all the data with json:
+const pool = new Pool({ connectionString: connectionString });
 
 // set the local and environment port to connect to
 app.set("port", process.env.PORT || 5000);
 
 // app.get("/getUser", getUser);
 
-app.get("/", "./public/sign_in.html");
+app.get("/", "sign_in.html");
 
 // folder where all the static files live
 app.use(express.static("public"));
