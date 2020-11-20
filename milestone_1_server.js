@@ -16,7 +16,7 @@ app.set("port", process.env.PORT || 5000);
 
 app.get("/getUser", getUser);
 app.get("/welcome_page", welcomePage);
-app.get("/sign_in", signIn);
+app.get("/welcome_page", welcomePage);
 
 // // views is directory for all template files
 app.set("views", __dirname + "/views");
@@ -33,15 +33,16 @@ function welcomePage(req, res) {
   res.render("pages/welcome_page");
 }
 
-function signIn(req, res) {
-  const user_id = request.query.user_id;
-  // const txtPassword = request.query.txtPassword;
-
-  // search for existing user in the database
-  getUserFromDb(response, user_id);
+/*******************************************************************************
+ * FUNCTION: getUser
+ * It search for an user by id and pass it to the getUserFromDb to look for the
+ * user into the database.
+ ******************************************************************************/
+function getUser(req, res) {
   console.log("Getting information from current user...");
 
   // to search for user by id, we need to do the following:
+  var user_id = req.query.user_id;
   console.log("Retrieving person with id: ", user_id);
 
   // call the function passing the typed id and the function which displays
@@ -56,31 +57,6 @@ function signIn(req, res) {
     }
   });
 }
-
-/*******************************************************************************
- * FUNCTION: getUser
- * It search for an user by id and pass it to the getUserFromDb to look for the
- * user into the database.
- ******************************************************************************/
-// function getUser(req, res) {
-//   console.log("Getting information from current user...");
-
-//   // to search for user by id, we need to do the following:
-//   var user_id = req.query.user_id;
-//   console.log("Retrieving person with id: ", user_id);
-
-//   // call the function passing the typed id and the function which displays
-//   // the result on the console
-//   getUserFromDb(user_id, function (error, result) {
-//     console.log("Back from the getPersonFromDb function with result: ", result);
-
-//     if (error || result == null || result.length != 1) {
-//       res.status(500).json({ success: false, data: error });
-//     } else {
-//       res.json(result[0]);
-//     }
-//   });
-// }
 /*******************************************************************************
  * FUNCTION: getUserFromDb
  * It interact with the postgresql database, using a pool query with the
@@ -94,7 +70,7 @@ function getUserFromDb(user_id, callback) {
   // sequel, declaring that the passed id will be an integer and it will be
   // passed as first parameter
   var sql =
-    "SELECT user_id, name_user, password, nickname FROM chat_user WHERE user_id = '${user_id}'";
+    "SELECT user_id, name_user, password, nickname FROM chat_user WHERE user_id = $1::int";
 
   // parameters saved as array (in this case we have only a value, id)
   var params = [user_id];
