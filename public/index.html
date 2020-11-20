@@ -4,16 +4,39 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <title>Messenger</title>
+    <title>Messenger Sign-in</title>
   </head>
+
   <body>
-    <h1>Messenger</h1>
+    <div>
+      <img
+        src="#"
+        alt="messenger_icon"
+        id="messenger_icon"
+        width="300"
+        height="300"
+      />
 
-    <div id="message-container"></div>
+      <h1>Please sign in below:</h1>
+      <br />
+      <form id="mainForm" action="signIn.php" method="POST">
+        <label for="txtUser"> Username </label>
+        <input type="text" id="txtUser" name="txtUser" placeholder="Username" />
 
-    <form id="second-container">
-      <input type="text" id="message-input" />
-      <input type="submit" id="send-button" value="Send" />
-    </form>
+        <label for="txtPassword"> Password </label>
+        <input
+          type="password"
+          id="txtPassword"
+          name="txtPassword"
+          placeholder="Password"
+        />
+        <br />
+        <br />
+        <br />
+        <button type="submit">Sign In</button>
+      </form>
+
+      <a href="signUp.php">Sign up - New Account</a>
+    </div>
   </body>
 </html>

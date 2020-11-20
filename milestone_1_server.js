@@ -15,7 +15,7 @@ const pool = new Pool({ connectionString: connectionString });
 app.set("port", process.env.PORT || 5000);
 
 app.get("/getUser", getUser);
-app.get("/sign_in", signIn);
+app.get("/welcome_page", welcomePage);
 
 // // views is directory for all template files
 app.set("views", __dirname + "/views");
@@ -28,8 +28,8 @@ app.listen(app.get("port"), function () {
   console.log("Now listening for connections on port: ", app.get("port"));
 });
 
-function signIn(req, res) {
-  res.render("pages/sign_in");
+function welcomePage(req, res) {
+  res.render("pages/welcome_page");
 }
 
 /*******************************************************************************
