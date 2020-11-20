@@ -14,7 +14,7 @@ const pool = new Pool({ connectionString: connectionString });
 // set the local and environment port to connect to
 app.set("port", process.env.PORT || 5000);
 
-app.get("/getUser", getUser);
+// app.get("/getUser", getUser);
 
 app.get("/", "./public/sign_in.html");
 
