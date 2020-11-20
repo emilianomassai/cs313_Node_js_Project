@@ -69,7 +69,7 @@ function getUserFromDb(user_id, callback) {
   // sequel, declaring that the passed id will be an integer and it will be
   // passed as first parameter
   var sql =
-    "SELECT user_id, name_user, password, nickname FROM chat_user WHERE user_id = $1::int";
+    "SELECT user_id, name_user, password, nickname FROM chat_user WHERE user_id = 1";
 
   // parameters saved as array (in this case we have only a value, id)
   var params = [user_id];
