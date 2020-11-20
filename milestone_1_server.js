@@ -11,16 +11,15 @@ const connectionString = process.env.DATABASE_URL;
 // establish the connection to the data source, passing all the data with json:
 const pool = new Pool({ connectionString: connectionString });
 
-console.log("connection string " + pool);
 // set the local and environment port to connect to
 app.set("port", process.env.PORT || 5000);
 
 app.get("/getUser", getUser);
-app.get("/sign_in", signIn);
+// app.get("/sign_in", signIn);
 
-// views is directory for all template files
-app.set("views", __dirname + "/views");
-app.set("view engine", "ejs");
+// // views is directory for all template files
+// app.set("views", __dirname + "/views");
+// app.set("view engine", "ejs");
 
 // folder where all the static files live
 app.use(express.static("public"));
@@ -29,9 +28,9 @@ app.listen(app.get("port"), function () {
   console.log("Now listening for connections on port: ", app.get("port"));
 });
 
-function signIn(req, res) {
-  res.render("pages/sign_in");
-}
+// function signIn(req, res) {
+//   res.render("pages/sign_in");
+// }
 
 /*******************************************************************************
  * FUNCTION: getUser
@@ -42,7 +41,7 @@ function getUser(req, res) {
   console.log("Getting information from current user...");
 
   // to search for user by id, we need to do the following:
-  var user_id = req.query.chat_user.user_id;
+  var user_id = req.query.user_id;
   console.log("Retrieving person with id: ", user_id);
 
   // call the function passing the typed id and the function which displays
