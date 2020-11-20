@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <title>Messenger Search User</title>
+    <title>Messenger Sign-in</title>
   </head>
 
   <body>
@@ -17,23 +17,23 @@
         height="300"
       />
 
-      <h1>Search for user:</h1>
+      <h1>Please sign in below:</h1>
       <br />
-      <form id="mainForm" action="/sign_in" method="get">
-        <label for="user_id"> User Id </label>
-        <input type="text" id="user_id" name="user_id" placeholder="User Id" />
+      <form id="mainForm" action="#" method="POST">
+        <label for="txtUser"> Username </label>
+        <input type="text" id="txtUser" name="txtUser" placeholder="Username" />
 
-        <!-- <label for="txtPassword"> Password </label>
+        <label for="txtPassword"> Password </label>
         <input
           type="password"
           id="txtPassword"
           name="txtPassword"
           placeholder="Password"
-        /> -->
+        />
         <br />
         <br />
         <br />
-        <button type="submit">Search</button>
+        <button type="submit">Sign In</button>
       </form>
 
       <a href="signUp.ejs">Sign up - New Account</a>
