@@ -34,19 +34,19 @@ function getUser(req, res) {
   // to search for user by id, we need to do the following:
   var user_id = req.query.user_id;
   console.log("Retrieving person with id: ", user_id);
+
+  // call the function passing the typed id and the function which displays
+  // the result on the console
+  getUserFromDb(user_id, function (error, result) {
+    console.log("Back from the getPersonFromDb function with result: ", result);
+
+    if (error || result == null || result.length != 1) {
+      res.status(500).json({ success: false, data: error });
+    } else {
+      res.json(result[0]);
+    }
+  });
 }
-// call the function passing the typed id and the function which displays
-// the result on the console
-getUserFromDb(user_id, function (error, result) {
-  console.log("Back from the getPersonFromDb function with result: ", result);
-
-  if (error || result == null || result.length != 1) {
-    res.status(500).json({ success: false, data: error });
-  } else {
-    res.json(result[0]);
-  }
-});
-
 /*******************************************************************************
  * FUNCTION: getUserFromDb
  * It interact with the postgresql database, using a pool query with the
