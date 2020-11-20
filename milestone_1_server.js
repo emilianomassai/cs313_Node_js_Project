@@ -16,7 +16,6 @@ app.set("port", process.env.PORT || 5000);
 
 app.get("/getUser", getUser);
 app.get("/welcome_page", welcomePage);
-app.get("/welcome_page", welcomePage);
 
 // // views is directory for all template files
 app.set("views", __dirname + "/views");
