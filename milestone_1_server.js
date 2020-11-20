@@ -41,7 +41,7 @@ function getUser(req, res) {
   console.log("Getting information from current user...");
 
   // to search for user by id, we need to do the following:
-  var user_id = req.query.user_id;
+  var user_id = req.query.chat_user.user_id;
   console.log("Retrieving person with id: ", user_id);
 
   // call the function passing the typed id and the function which displays
@@ -69,7 +69,7 @@ function getUserFromDb(user_id, callback) {
   // sequel, declaring that the passed id will be an integer and it will be
   // passed as first parameter
   var sql =
-    "SELECT user_id, name_user, password, nickname FROM chat_user WHERE chat_user.user_id = $1::int";
+    "SELECT user_id, name_user, password, nickname FROM user WHERE id = $1::int";
 
   // parameters saved as array (in this case we have only a value, id)
   var params = [user_id];
