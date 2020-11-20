@@ -11,6 +11,7 @@ const connectionString = process.env.DATABASE_URL;
 // establish the connection to the data source, passing all the data with json:
 const pool = new Pool({ connectionString: connectionString });
 
+console.log("connection string " + pool);
 // set the local and environment port to connect to
 app.set("port", process.env.PORT || 5000);
 
