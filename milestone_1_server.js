@@ -102,7 +102,7 @@ function getUserFromDb(user_id, callback) {
   var params = [user_id];
 
   // postgres module, please go and run this query (sql) with this parameters (params) and when is done call the callback function
-  pool.body(sql, params, function (err, result) {
+  pool.query(sql, params, function (err, result) {
     if (err) {
       // if an error occurred, display the error to the console, showing what
       // and where occurred.
