@@ -81,16 +81,20 @@ function getUser(req, res) {
 
       // res.status(500).json({ success: false, data: error });
     } else {
+      response.render("pages/userFound", result);
+
+      // display a whole json string of all the information about the user
       // res.json(result[0]);
-      res.json(
-        "<h2>User found in the database!</h2> Name of the user : " +
-          result[0].name_user +
-          ";<br>Nickname of the user : " +
-          result[0].nickname +
-          ";<br>Password of the user : " +
-          result[0].password +
-          ";<br>"
-      );
+
+      // res.json(
+      //   "<h2>User found in the database!</h2> Name of the user : " +
+      //     result[0].name_user +
+      //     ";<br>Nickname of the user : " +
+      //     result[0].nickname +
+      //     ";<br>Password of the user : " +
+      //     result[0].password +
+      //     ";<br>"
+      // );
     }
   });
 }
