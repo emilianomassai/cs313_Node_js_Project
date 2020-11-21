@@ -1,5 +1,13 @@
 var express = require("express");
 var app = express();
+
+//import body-parser
+var bodyParser = require('body-parser');
+
+//configure body-parser for express
+app.use(bodyParser.urlencoded({extended:false}));
+app.use(bodyParser.json());
+
 var params = { txtUser: "" };
 // say to the program what kind of database will be used
 const { Pool } = require("pg");
