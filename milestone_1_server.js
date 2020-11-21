@@ -112,7 +112,7 @@ function getUserFromDb(user_id, callback) {
     }
 
     // display the result as string from the json string
-    console.log("Found DB result: " + JSON.stringify(result.rows));
+    console.log("Found DB result: " + JSON.stringify(result.name_user));
 
     // once we got the result from DB, we pass it to the getUserFromDb
     // function
