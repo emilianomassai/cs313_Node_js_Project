@@ -22,7 +22,7 @@ const pool = new Pool({ connectionString: connectionString });
 // set the local and environment port to connect to
 app.set("port", process.env.PORT || 5000);
 
-app.get("/getUser", getUser);
+app.post("/getUser", getUser);
 
 // from index sign-in page, when signing in, the user access to
 // the welcome page of the chat app
@@ -67,7 +67,7 @@ function getUser(req, res) {
   // to search for user by id, we need to do the following:
   // var user_id = req.query.user_id;
 
-  var user_id = req.query.user_id;
+  var user_id = req.body.user_id;
 
   console.log("Retrieving person with id: ", user_id);
 
