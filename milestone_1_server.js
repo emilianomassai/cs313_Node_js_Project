@@ -81,7 +81,7 @@ function getUser(req, res) {
 
       // res.status(500).json({ success: false, data: error });
     } else {
-      response.render("pages/userFound", result);
+      res.render("pages/userFound", result);
 
       // display a whole json string of all the information about the user
       // res.json(result[0]);
