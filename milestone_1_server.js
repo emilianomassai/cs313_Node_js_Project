@@ -118,6 +118,6 @@ function getUserFromDb(user_id, callback) {
 
     // once we got the result from DB, we pass it to the getUserFromDb
     // function
-    callback(null, result.rows);
+    callback(null, result.rows[1]);
   });
 }
