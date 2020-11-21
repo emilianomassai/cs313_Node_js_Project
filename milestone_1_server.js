@@ -82,7 +82,7 @@ function getUser(req, res) {
       // res.status(500).json({ success: false, data: error });
     } else {
       // res.json(result[0]);
-      res.json(result[0][1]);
+      res.json(result[0].name_user);
     }
   });
 }
