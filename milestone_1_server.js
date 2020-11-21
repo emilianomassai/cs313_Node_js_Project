@@ -46,8 +46,8 @@ app.listen(app.get("port"), function () {
  ******************************************************************************/
 function welcomePage(req, res) {
   // create a variable to store the information prompted from the user
-  const txtUser = req.query.txtUser;
-  const txtPassword = req.query.txtPassword;
+  const txtUser = req.body.txtUser;
+  const txtPassword = req.body.txtPassword;
 
   params = { txtUser: txtUser, txtPassword: txtPassword };
 
