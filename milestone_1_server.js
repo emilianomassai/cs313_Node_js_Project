@@ -99,7 +99,7 @@ function getUserFromDb(user_id, callback) {
     "SELECT user_id, name_user, password, nickname FROM chat_user WHERE user_id = $1::int";
 
   // parameters saved as array (in this case we have only a value, id)
-  var params = [user_id, name_user, password, nickname];
+  var params = [user_id];
 
   // postgres module, please go and run this query (sql) with this parameters (params) and when is done call the callback function
   pool.query(sql, params, function (err, result) {
