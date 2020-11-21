@@ -18,7 +18,7 @@ app.get("/getUser", getUser);
 
 // from index sign-in page, when signing in, the user access to
 // the welcome page of the chat app
-app.get("/welcome_page", welcomePage);
+app.post("/welcome_page", welcomePage);
 
 // // views is directory for all template files
 app.set("views", __dirname + "/views");
@@ -39,9 +39,9 @@ app.listen(app.get("port"), function () {
 function welcomePage(req, res) {
   // create a variable to store the information prompted from the user
   const txtUser = req.query.txtUser;
-  // // search into the database
+  const txtPassword = req.query.txtPassword;
 
-  params = { txtUser: txtUser };
+  params = { txtUser: txtUser, txtPassword: txtPassword };
 
   // if (the user and password matches the prompted data from the user){}
   res.render("pages/welcome_page", params);
