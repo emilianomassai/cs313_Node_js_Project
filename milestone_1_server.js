@@ -81,7 +81,7 @@ function getUser(req, res) {
 
       // res.status(500).json({ success: false, data: error });
     } else {
-      res.fields[0].name;
+      res.json(res.fields[0].name);
       // res.json(result[0]);
     }
   });
