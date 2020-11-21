@@ -38,13 +38,13 @@ app.listen(app.get("port"), function () {
  ******************************************************************************/
 function welcomePage(req, res) {
   // create a variable to store the information prompted from the user
-  // const txtUser = request.query.txtUser;
+  const txtUser = request.query.txtUser;
   // // search into the database
 
-  // params = { txtUser: txtUser };
+  params = { txtUser: txtUser };
 
   // if (the user and password matches the prompted data from the user){}
-  res.render("pages/welcome_page");
+  res.render("pages/welcome_page", params);
   //} else {display error res.}
 }
 
