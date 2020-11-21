@@ -18,7 +18,7 @@ app.get("/getUser", getUser);
 
 // from index sign-in page, when signing in, the user access to
 // the welcome page of the chat app
-app.post("/welcome_page", welcomePage);
+app.get("/welcome_page", welcomePage);
 
 // // views is directory for all template files
 app.set("views", __dirname + "/views");
