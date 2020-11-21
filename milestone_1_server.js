@@ -22,7 +22,7 @@ const pool = new Pool({ connectionString: connectionString });
 // set the local and environment port to connect to
 app.set("port", process.env.PORT || 5000);
 
-app.post("/getUser", getUser);
+app.get("/getUser", getUser);
 
 // from index sign-in page, when signing in, the user access to
 // the welcome page of the chat app
@@ -65,9 +65,7 @@ function getUser(req, res) {
   console.log("Getting information from current user...");
 
   // to search for user by id, we need to do the following:
-  // var user_id = req.body.user_id;
-  var user_id = req.body.txtUser;
-
+  var user_id = req.query.user_id;
   console.log("Retrieving person with id: ", user_id);
 
   // call the function passing the typed id and the function which displays
@@ -100,9 +98,8 @@ function getUserFromDb(user_id, callback) {
   // parameters saved as array (in this case we have only a value, id)
   var params = [user_id];
 
-  // postgres module, please go and run this body with this parameters
-  // (params) and when is done call the callback function
-  pool.body(sql, params, function (err, result) {
+  // postgres module, please go and run this query (sql) with this parameters (params) and when is done call the callback function
+  pool.query(sql, params, function (err, result) {
     if (err) {
       // if an error occurred, display the error to the console, showing what
       // and where occurred.
