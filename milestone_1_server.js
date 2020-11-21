@@ -65,7 +65,10 @@ function getUser(req, res) {
   console.log("Getting information from current user...");
 
   // to search for user by id, we need to do the following:
-  var user_id = req.query.user_id;
+  // var user_id = req.query.user_id;
+
+  var user_id = req.query.textUser;
+
   console.log("Retrieving person with id: ", user_id);
 
   // call the function passing the typed id and the function which displays
