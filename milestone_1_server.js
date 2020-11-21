@@ -77,7 +77,9 @@ function getUser(req, res) {
     console.log("Back from the getPersonFromDb function with result: ", result);
 
     if (error || result == null || result.length != 1) {
-      res.status(500).json({ success: false, data: error });
+      res.status(500).json("No user found in the database with that Id!");
+
+      // res.status(500).json({ success: false, data: error });
     } else {
       res.json(result[0]);
     }
