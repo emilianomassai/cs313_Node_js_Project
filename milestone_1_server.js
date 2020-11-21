@@ -81,7 +81,8 @@ function getUser(req, res) {
 
       // res.status(500).json({ success: false, data: error });
     } else {
-      res.json(result[0]);
+      // res.json(result[0]);
+      res.json(result[0][1]);
     }
   });
 }
@@ -118,6 +119,6 @@ function getUserFromDb(user_id, callback) {
 
     // once we got the result from DB, we pass it to the getUserFromDb
     // function
-    callback(null, result.rows[1]);
+    callback(null, result.rows);
   });
 }
