@@ -41,8 +41,10 @@ function welcomePage(req, res) {
   const txtUser = request.query.txtUser;
   // search into the database
 
+  params = { txtUser: txtUser };
+
   // if (the user and password matches the prompted data from the user){}
-  res.render("pages/welcome_page", txtUser);
+  res.render("pages/welcome_page", params);
   //} else {display error res.}
 }
 
