@@ -82,7 +82,15 @@ function getUser(req, res) {
       // res.status(500).json({ success: false, data: error });
     } else {
       // res.json(result[0]);
-      res.json(result[0].name_user);
+      res.json(
+        "<h2>User found in the database!</h2> Name of the user : " +
+          result[0].name_user +
+          ";<br>Nickname of the user : " +
+          result[0].nickname +
+          ";<br>Password of the user : " +
+          result[0].password +
+          ";<br>"
+      );
     }
   });
 }
