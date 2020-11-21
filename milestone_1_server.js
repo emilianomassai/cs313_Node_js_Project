@@ -15,6 +15,9 @@ const pool = new Pool({ connectionString: connectionString });
 app.set("port", process.env.PORT || 5000);
 
 app.get("/getUser", getUser);
+
+// from index sign-in page, when signing in, the user access to
+// the welcome page of the chat app
 app.post("/welcome_page", welcomePage);
 
 // // views is directory for all template files
@@ -28,8 +31,19 @@ app.listen(app.get("port"), function () {
   console.log("Now listening for connections on port: ", app.get("port"));
 });
 
+/*******************************************************************************
+ * FUNCTION: welcomePage
+ * It checks if the username and password match one user stored in the database.
+ * If so, the user is redirected to the "welcome page"
+ ******************************************************************************/
 function welcomePage(req, res) {
-  res.render("pages/welcome_page");
+  // create a variable to store the information prompted from the user
+  const txtUser = request.query.txtUser;
+  // search into the database
+
+  // if (the user and password matches the prompted data from the user){}
+  res.render("pages/welcome_page", txtUser);
+  //} else {display error res.}
 }
 
 /*******************************************************************************
