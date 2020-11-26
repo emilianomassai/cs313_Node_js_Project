@@ -27,7 +27,7 @@ function searchUser() {
         "<br>" +
         "<li>" +
         "Username: " +
-        user.Name +
+        user.name_user +
         " " +
         "Nickname: " +
         user.Nickname +
