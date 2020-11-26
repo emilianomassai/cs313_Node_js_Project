@@ -8,7 +8,7 @@ function searchUser() {
 
   // 1. AJAX request to the server to search ///////////////////////////////////
   // In the same way we can do with $post() to interact with the server/////////
-  if (!status(500)) {
+  
     // call the method getUser from milestone_1_server.js and look for an user
     $.post("/getUser", { user_id: user_id }, function (data) {
       console.log("Back from the server with: ");
@@ -50,7 +50,5 @@ function searchUser() {
       //     // $("#ulScriptures").append("<li>item2</li>");
       //     // $("#ulScriptures").append("<li>item3</li>");
     });
-  } else {
-    $("#resultFromServer").html("Pirla!");
-  }
+
 }
