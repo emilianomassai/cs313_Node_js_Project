@@ -31,10 +31,12 @@ function searchUser() {
         "<li>" +
         "Username: " +
         name +
-        " " +
+        "</li>" +
+        "<li>" +
         "Nickname: " +
         nickname +
-        " " +
+        "</li>" +
+        "<li>" +
         "Password: " +
         password +
         "</li>"
