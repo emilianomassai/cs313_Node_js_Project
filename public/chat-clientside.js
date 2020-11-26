@@ -25,7 +25,13 @@ function searchUser() {
 
     // 3. Using the results to update the HTML page //////////////////////////
 
-    if (data) {
+    if (!data) {
+      $("#resultFromServer").html(
+        "No user found with Id: " +
+          user_id +
+          ". Please choose another Id and try again!"
+      );
+    } else {
       $("#resultFromServer").html(
         "An user is found in our database with the following info: " +
           "<br>" +
@@ -41,12 +47,6 @@ function searchUser() {
           "Password: " +
           password +
           "</li>"
-      );
-    } else {
-      $("#resultFromServer").html(
-        "No user found with Id: " +
-          user_id +
-          ". Please choose another Id and try again!"
       );
     }
     //       console.log(scripture);
