@@ -18,27 +18,25 @@ function searchUser() {
 
     // for loop to get elements of the list and take them out
     // each of them as we go, to be able to display them into the html page
-    for (var i = 0; i < data.list.length; i++) {
-      var user = data.list[i];
 
-      // 3. Using the results to update the HTML page //////////////////////////
+    // 3. Using the results to update the HTML page //////////////////////////
 
-      $("#resultFromServer").append(
-        "An user is found in our database with the following info: " +
-          "<br>" +
-          "<li>" +
-          "Username: " +
-          user.Name +
-          " " +
-          "Nickname: " +
-          user.Nickname +
-          " " +
-          "Password: " +
-          user.Password +
-          "</li>"
-      );
-      //       console.log(scripture);
-    }
+    $("#resultFromServer").append(
+      "An user is found in our database with the following info: " +
+        "<br>" +
+        "<li>" +
+        "Username: " +
+        user.Name +
+        " " +
+        "Nickname: " +
+        user.Nickname +
+        " " +
+        "Password: " +
+        user.Password +
+        "</li>"
+    );
+    //       console.log(scripture);
+
     //     // select the list on the scriptures.html page where to display the
     //     // results
     //     // $("#ulScriptures").append("<li>item1</li>");
