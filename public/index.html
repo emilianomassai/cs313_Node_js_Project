@@ -4,6 +4,9 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+    <script src="./chat-clientside.js"></script>
 
     <link rel="icon" type="image/ico" href="./images/Messenger.png" />
     <title>Messenger</title>
@@ -32,10 +35,10 @@
       </p>
       <br />
       <!-- <form id="mainForm" action="/welcome_page" method="POST"> -->
-      <form id="mainForm" action="/getUser" method="POST">
-        <label for="user_id"> User Id </label>
-        <input type="text" id="user_id" name="user_id" placeholder="User Id" />
-        <!-- 
+      <!-- <form id="mainForm" action="/getUser" method="POST"> -->
+      <label for="user_id"> User Id </label>
+      <input type="text" id="user_id" name="user_id" placeholder="User Id" />
+      <!-- 
         <label for="txtUser"> Username </label>
         <input type="text" id="txtUser" name="txtUser" placeholder="Username" />
 
@@ -46,12 +49,15 @@
           name="txtPassword"
           placeholder="Password"
         /> -->
-        <br />
-        <br />
-        <br />
-        <button type="submit">Search</button>
-      </form>
+      <br />
+      <br />
+      <br />
+      <button onclick="searchUser()">Search user</button> <br />
+      <!-- </form> -->
 
+      <div>
+        <ul id="resultFromServer"></ul>
+      </div>
       <!-- <a href="signUp.ejs">Sign up - New Account</a> -->
     </div>
   </body>
