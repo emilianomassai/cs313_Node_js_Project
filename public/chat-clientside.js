@@ -10,8 +10,8 @@ function searchUser() {
   // In the same way we can do with $post() to interact with the server/////////
 
   // call the method getUser from milestone_1_server.js and look for an user
-  $.post("/getUser", { user_id: user_id }, function (err, data) {
-    if (!err) {
+  $.post("/getUser", { user_id: user_id }, function (data) {
+    if (data) {
       console.log("Back from the server with: ");
       console.log(data);
 
@@ -42,15 +42,15 @@ function searchUser() {
           password +
           "</li>"
       );
-      //       console.log(scripture);
-
-      //     // select the list on the scriptures.html page where to display the
-      //     // results
-      //     // $("#ulScriptures").append("<li>item1</li>");
-      //     // $("#ulScriptures").append("<li>item2</li>");
-      //     // $("#ulScriptures").append("<li>item3</li>");
-    } else {
-      console.log("Pirla! C'è un errore! ");
+    } else if (!data) {
+      console.log("Strapirla! c'è ancora un errore!");
     }
+    //       console.log(scripture);
+
+    //     // select the list on the scriptures.html page where to display the
+    //     // results
+    //     // $("#ulScriptures").append("<li>item1</li>");
+    //     // $("#ulScriptures").append("<li>item2</li>");
+    //     // $("#ulScriptures").append("<li>item3</li>");
   });
 }
