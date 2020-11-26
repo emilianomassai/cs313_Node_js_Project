@@ -9,7 +9,7 @@ function searchUser() {
   // 1. AJAX request to the server to search ///////////////////////////////////
   // In the same way we can do with $post() to interact with the server/////////
 
-  // call the method search from index.js and look for a book
+  // call the method getUser from milestone_1_server.js and look for an user
   $.post("/getUser", { user_id: user_id }, function (data) {
     console.log("Back from the server with: ");
     console.log(data);
@@ -26,13 +26,13 @@ function searchUser() {
         "<br>" +
         "<li>" +
         "Username: " +
-        user.Name +
-        " " +
-        "Nickname: " +
-        user.Nickname +
-        " " +
-        "Password: " +
-        user.Password +
+        // user.Name +
+        // " " +
+        // "Nickname: " +
+        // user.Nickname +
+        // " " +
+        // "Password: " +
+        // user.Password +
         "</li>"
     );
     //       console.log(scripture);
