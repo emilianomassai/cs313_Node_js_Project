@@ -78,6 +78,7 @@ function getUser(req, res) {
 
     if (error || result == null || result.length != 1) {
       params = { user_id: user_id };
+      console.log("No user found!!");
 
       // res.render("pages/userNotFound", params);
 
