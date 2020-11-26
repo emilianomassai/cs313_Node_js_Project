@@ -12,9 +12,10 @@ function searchUser() {
   // call the method getUser from milestone_1_server.js and look for an user
   $.post("/getUser", { user_id: user_id }, function (data) {
     console.log("Back from the server with: ");
-    console.log(data);
+    console.log(data.name_user);
 
     var user = data.list;
+
     // 2. Getting the data back from the server ////////////////////////////////
 
     // for loop to get elements of the list and take them out
