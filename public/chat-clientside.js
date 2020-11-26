@@ -25,7 +25,7 @@ function searchUser() {
 
     // 3. Using the results to update the HTML page //////////////////////////
 
-    if (name && nickname && password) {
+    if (data) {
       $("#resultFromServer").html(
         "An user is found in our database with the following info: " +
           "<br>" +
