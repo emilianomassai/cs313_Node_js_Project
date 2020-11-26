@@ -25,7 +25,7 @@ function searchUser() {
 
     // 3. Using the results to update the HTML page //////////////////////////
 
-    $("#resultFromServer").append(
+    $("#resultFromServer").html(
       "An user is found in our database with the following info: " +
         "<br>" +
         "<li>" +
