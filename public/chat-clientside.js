@@ -25,22 +25,30 @@ function searchUser() {
 
     // 3. Using the results to update the HTML page //////////////////////////
 
-    $("#resultFromServer").html(
-      "An user is found in our database with the following info: " +
-        "<br>" +
-        "<li>" +
-        "Username: " +
-        name +
-        "</li>" +
-        "<li>" +
-        "Nickname: " +
-        nickname +
-        "</li>" +
-        "<li>" +
-        "Password: " +
-        password +
-        "</li>"
-    );
+    if (name && nickname && password) {
+      $("#resultFromServer").html(
+        "An user is found in our database with the following info: " +
+          "<br>" +
+          "<li>" +
+          "Username: " +
+          name +
+          "</li>" +
+          "<li>" +
+          "Nickname: " +
+          nickname +
+          "</li>" +
+          "<li>" +
+          "Password: " +
+          password +
+          "</li>"
+      );
+    } else {
+      $("#resultFromServer").html(
+        "No user found with Id: " +
+          user_id +
+          ". Please choose another Id and try again!"
+      );
+    }
     //       console.log(scripture);
 
     //     // select the list on the scriptures.html page where to display the
