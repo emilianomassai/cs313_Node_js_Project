@@ -79,27 +79,14 @@ function getUser(req, res) {
     if (error || result == null || result.length != 1) {
       params = { user_id: user_id };
 
-      res.render("pages/userNotFound", params);
+      // res.render("pages/userNotFound", params);
 
       // to send response 500 error from the server if the user is not found:
       // res.status(500).json({ success: false, data: error });
-
-      // res.status(500).json("No user found in the database with that Id!");
     } else {
-      res.render("pages/userFound", result[0]);
+      res.json(results);
 
-      // display a whole json string of all the information about the user
-      // res.json(result[0]);
-
-      // res.json(
-      //   "<h2>User found in the database!</h2> Name of the user : " +
-      //     result[0].name_user +
-      //     ";<br>Nickname of the user : " +
-      //     result[0].nickname +
-      //     ";<br>Password of the user : " +
-      //     result[0].password +
-      //     ";<br>"
-      // );
+      // res.render("pages/userFound", result[0]);
     }
   });
 }

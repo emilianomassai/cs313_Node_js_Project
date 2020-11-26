@@ -14,6 +14,7 @@ function searchUser() {
     console.log("Back from the server with: ");
     console.log(data);
 
+    var user = data.list;
     // 2. Getting the data back from the server ////////////////////////////////
 
     // for loop to get elements of the list and take them out
@@ -26,13 +27,13 @@ function searchUser() {
         "<br>" +
         "<li>" +
         "Username: " +
-        // user.Name +
-        // " " +
-        // "Nickname: " +
-        // user.Nickname +
-        // " " +
-        // "Password: " +
-        // user.Password +
+        user.Name +
+        " " +
+        "Nickname: " +
+        user.Nickname +
+        " " +
+        "Password: " +
+        user.Password +
         "</li>"
     );
     //       console.log(scripture);
