@@ -23,6 +23,7 @@ const pool = new Pool({ connectionString: connectionString });
 app.set("port", process.env.PORT || 5000);
 
 app.post("/getUser", getUser);
+app.post("/newGetUser", newGetUser);
 
 // from index sign-in page, when signing in, the user access to
 // the welcome page of the chat app
@@ -100,7 +101,13 @@ function newGetUser(req, res) {
   var name_user = req.body.txtUser;
   var password_user = req.body.txtPassword;
 
-  console.log("Retrieving user with name: ", name_user,  "and password ", password_user, "...");
+  console.log(
+    "Retrieving user with name: ",
+    name_user,
+    "and password ",
+    password_user,
+    "..."
+  );
 
   // // call the function passing the typed id and the function which displays
   // // the result on the console
