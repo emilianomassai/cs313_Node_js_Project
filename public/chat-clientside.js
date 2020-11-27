@@ -49,8 +49,8 @@ function signInUser() {
 
   // the following is jQuery code to get the value from the text box (from
   // index.html page) and store the value into a local variable
-  var name_user = $("#txtUser").val();
-  var password_user = $("#txtPassword").val();
+  // var name_user = $("#txtUser").val();
+  // var password_user = $("#txtPassword").val();
 
   // $.post(
   //   "/newGetUser",
