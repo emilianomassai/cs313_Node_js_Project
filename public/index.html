@@ -64,5 +64,10 @@
 
     <h1>Log In:</h1>
     <p>Please enter your username and password.</p>
+
+    <script>
+    var socket = io();  
+    socket.on("message", addMessages) 
+    </script>
   </body>
 </html>
