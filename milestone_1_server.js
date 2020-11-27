@@ -181,7 +181,7 @@ function newGetUserFromDb(name_user, password_user, callback) {
   // sequel, declaring that the passed id will be an integer and it will be
   // passed as first parameter
   var sql =
-    "SELECT user_id, name_user, password, nickname FROM chat_user WHERE name_user = $1::string, password = $2::string";
+    "SELECT user_id, name_user, password, nickname FROM chat_user WHERE name_user = $1::varchar, password = $2::varchar";
 
   // parameters saved as array (in this case we have only a value, id)
   var params = [name_user, password_user];
