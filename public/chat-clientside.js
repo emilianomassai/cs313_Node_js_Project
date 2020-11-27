@@ -8,47 +8,50 @@ function searchUser() {
 
   // 1. AJAX request to the server to search ///////////////////////////////////
   // In the same way we can do with $post() to interact with the server/////////
-  
-    // call the method getUser from milestone_1_server.js and look for an user
-    $.post("/getUser", { user_id: user_id }, function (data) {
-      console.log("Back from the server with: ");
-      console.log(data);
 
-      var name = data.name_user;
-      var nickname = data.nickname;
-      var password = data.password;
+  // call the method getUser from milestone_1_server.js and look for an user
+  $.post("/getUser", { user_id: user_id }, function (data) {
+    console.log("Back from the server with: ");
+    console.log(data);
 
-      // 2. Getting the data back from the server ////////////////////////////////
+    var name = data.name_user;
+    var nickname = data.nickname;
+    var password = data.password;
 
-      // for loop to get elements of the list and take them out
-      // each of them as we go, to be able to display them into the html page
+    // 2. Getting the data back from the server ////////////////////////////////
 
-      // 3. Using the results to update the HTML page //////////////////////////
+    // for loop to get elements of the list and take them out
+    // each of them as we go, to be able to display them into the html page
 
-      $("#resultFromServer").html(
-        "An user is found in our database with the following info: " +
-          "<br>" +
-          "<li>" +
-          "Username: " +
-          name +
-          "</li>" +
-          "<li>" +
-          "Nickname: " +
-          nickname +
-          "</li>" +
-          "<li>" +
-          "Password: " +
-          password +
-          "</li>"
-      );
+    // 3. Using the results to update the HTML page //////////////////////////
 
-      //       console.log(scripture);
+    $("#resultFromServer").html(
+      "An user is found in our database with the following info: " +
+        "<br>" +
+        "<li>" +
+        "Username: " +
+        name +
+        "</li>" +
+        "<li>" +
+        "Nickname: " +
+        nickname +
+        "</li>" +
+        "<li>" +
+        "Password: " +
+        password +
+        "</li>"
+    );
 
-      //     // select the list on the scriptures.html page where to display the
-      //     // results
-      //     // $("#ulScriptures").append("<li>item1</li>");
-      //     // $("#ulScriptures").append("<li>item2</li>");
-      //     // $("#ulScriptures").append("<li>item3</li>");
-    });
+    //       console.log(scripture);
 
+    //     // select the list on the scriptures.html page where to display the
+    //     // results
+    //     // $("#ulScriptures").append("<li>item1</li>");
+    //     // $("#ulScriptures").append("<li>item2</li>");
+    //     // $("#ulScriptures").append("<li>item3</li>");
+  });
+}
+
+function signInUser() {
+  console.log("Sign in user ...");
 }

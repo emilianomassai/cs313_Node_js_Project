@@ -61,7 +61,37 @@
       <!-- <a href="signUp.ejs">Sign up - New Account</a> -->
     </div>
 
-    <h1>Log In:</h1>
-    <p>Please enter your username and password.</p>
+    <div>
+      <h1>Log In:</h1>
+      <p>Please enter your username and password.</p>
+      <form id="mainForm">
+        <label for="txtUser">
+          <h4>Username</h4>
+        </label>
+        <input type="text" id="txtUser" name="txtUser" placeholder="Username" />
+
+        <label for="txtPassword">
+          <h4>Password</h4>
+        </label>
+        <input
+          type="password"
+          id="txtPassword"
+          name="txtPassword"
+          placeholder="Password"
+        />
+        <br />
+        <br />
+        <br />
+        <button onclick="signInUser()">Sign In</button>
+      </form>
+
+      <button>Sign up</button>
+    </div>
+
+    <footer>
+      <p style="text-align: center">
+        Copyright ©2020 emiDev Inc. All rights reserved.
+      </p>
+    </footer>
   </body>
 </html>
