@@ -4,16 +4,6 @@ var app = express();
 //import body-parser to be able to use POST instead of GET method
 var bodyParser = require("body-parser");
 
-// to avoid the need to refresh the page to see the new messages, we
-// need to add socket JavaScript library, a push notification system that will
-// send messages from server to client.
-var http = require("http").Server(app);
-var io = require("socket.io")(http);
-
-io.on("connection", () => {
-  console.log("a user is connected");
-});
-
 //configure body-parser for express
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
@@ -95,9 +85,6 @@ function getUser(req, res) {
       // to send response 500 error from the server if the user is not found:
       res.status(500).json({ success: false, data: "No user found!" });
     } else {
-      io.emit("message", req.body);
-      res.sendStatus(200);
-
       res.json(result[0]);
 
       // res.render("pages/userFound", result[0]);
