@@ -49,6 +49,7 @@ function signInUser() {
 
   var name_user = $("#txtUser").val();
   var password_user = $("#txtPassword").val();
+  console.log("Looking for ", name_user, " with password ", password_user);
 
   $.post(
     "/newGetUser",
