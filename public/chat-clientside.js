@@ -52,12 +52,12 @@ function signInUser() {
   var name_user = $("#txtUser").val();
   var password_user = $("#txtPassword").val();
 
-  $.post(
-    "/newGetUser",
-    { name_user: name_user, password: password_user },
-    function (data) {
-      console.log("Back from the server with: ");
-      console.log(data);
-    }
-  );
+  // $.post(
+  //   "/newGetUser",
+  //   { name_user: name_user, password: password_user },
+  //   function (data) {
+  //     console.log("Back from the server with: ");
+  //     console.log(data);
+  //   }
+  // );
 }
