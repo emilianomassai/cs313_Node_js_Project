@@ -47,19 +47,18 @@ function searchUser() {
 function signInUser() {
   console.log("Sign in user ...");
 
-  // the following is jQuery code to get the value from the text box (from
-  // index.html page) and store the value into a local variable
-  // var name_user = $("#txtUser").val();
-  // var password_user = $("#txtPassword").val();
+  the following is jQuery code to get the value from the text box (from
+  index.html page) and store the value into a local variable
+  var name_user = $("#txtUser").val();
+  var password_user = $("#txtPassword").val();
 
-  // $.post(
-  //   "/newGetUser",
-  //   { name_user: name_user, password: password_user },
-  //   function (data) {
-  //     console.log("Back from the server with: ");
-  //     console.log(data);
-  //   }
-  // );
+  $.post(
+    "/newGetUser",
+    { name_user: name_user, password: password_user },
+    function (data) {
+      console.log("Back from the server with: ");
+      console.log(data);
+    }
+  );
 
-  $("#resultFromServer").html("Hello!");
 }
