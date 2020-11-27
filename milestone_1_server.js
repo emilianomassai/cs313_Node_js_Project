@@ -177,30 +177,5 @@ function getUserFromDb(user_id, callback) {
 
 function newGetUserFromDb(name_user, password_user, callback) {
   console.log("getUserFromDb called with name_user: ", name_user);
-
-  // sequel, declaring that the passed id will be an integer and it will be
-  // passed as first parameter
-  var sql =
-    "SELECT user_id, name_user, password, nickname FROM chat_user WHERE name_user = $1::varchar, password = $2::varchar";
-
-  // parameters saved as array (in this case we have only a value, id)
-  var params = [name_user, password_user];
-
-  // postgres module, please go and run this query (sql) with this parameters (params) and when is done call the callback function
-  pool.query(sql, params, function (err, result) {
-    if (err) {
-      // if an error occurred, display the error to the console, showing what
-      // and where occurred.
-      console.log("An error with the DB occurred");
-      console.log(err);
-      callback(err, null);
-    }
-
-    // display the result as string from the json string
-    console.log("Found DB result: " + JSON.stringify(result.rows));
-
-    // once we got the result from DB, we pass it to the getUserFromDb
-    // function
-    callback(null, result.rows);
-  });
+  console.log("getUserFromDb called with password_user: ", password_user);
 }
