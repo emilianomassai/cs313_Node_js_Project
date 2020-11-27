@@ -98,8 +98,8 @@ function newGetUser(req, res) {
 
   // to search for user, we need to do the following:
 
-  var name_user = req.body.txtUser;
-  var password_user = req.body.txtPassword;
+  var name_user = req.body.name_user;
+  var password_user = req.body.password_user;
 
   console.log(
     "Retrieving user with name: ",
