@@ -108,7 +108,7 @@ function newGetUser(req, res) {
     password_user,
     "..."
   );
-  res.status(500).json({ success: false, data: "No user found!" });
+  res.status(200).json({ success: true, data: "Found!" });
 
   // // call the function passing the typed id and the function which displays
   // // the result on the console
