@@ -91,6 +91,37 @@ function getUser(req, res) {
     }
   });
 }
+
+function newGetUser(req, res) {
+  console.log("Checking if the user is in the database...");
+
+  // to search for user, we need to do the following:
+
+  var name_user = req.body.txtUser;
+  var password_user = req.body.txtPassword;
+
+  console.log("Retrieving user with name: ", name_user,  "and password ", password_user, "...");
+
+  // // call the function passing the typed id and the function which displays
+  // // the result on the console
+  // getUserFromDb(user_id, function (error, result) {
+  //   console.log("Back from the getPersonFromDb function with result: ", result);
+
+  //   if (error || result == null || result.length != 1) {
+  //     params = { user_id: user_id };
+  //     console.log("No user found!!");
+
+  //     // res.render("pages/userNotFound", params);
+
+  //     // to send response 500 error from the server if the user is not found:
+  //     res.status(500).json({ success: false, data: "No user found!" });
+  //   } else {
+  //     res.json(result[0]);
+
+  //     // res.render("pages/userFound", result[0]);
+  //   }
+  // });
+}
 /*******************************************************************************
  * FUNCTION: getUserFromDb
  * It interact with the postgresql database, using a pool query with the

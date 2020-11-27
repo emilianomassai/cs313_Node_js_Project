@@ -2,7 +2,7 @@ function searchUser() {
   console.log("Searching user ...");
 
   // the following is jQuery code to get the value from the text box (from
-  // scriptures.html page) and store the value into a local variable
+  // index.html page) and store the value into a local variable
   var user_id = $("#user_id").val();
   console.log("User id: " + user_id);
 
@@ -41,17 +41,24 @@ function searchUser() {
         password +
         "</li>"
     );
-
-    //       console.log(scripture);
-
-    //     // select the list on the scriptures.html page where to display the
-    //     // results
-    //     // $("#ulScriptures").append("<li>item1</li>");
-    //     // $("#ulScriptures").append("<li>item2</li>");
-    //     // $("#ulScriptures").append("<li>item3</li>");
   });
 }
 
 function signInUser() {
   console.log("Sign in user ...");
+
+  // the following is jQuery code to get the value from the text box (from
+  // index.html page) and store the value into a local variable
+  var name_user = $("#txtUser").val();
+  var password_user = $("#txtPassword").val();
+
+  $.post("/newGetUser", { name_user: name_user, password: password_user}, function (data) {
+    console.log("Back from the server with: ");
+    console.log(data);
+    
+    var name = data.name_user;
+    var password = data.password;
+
+    if (name )
+  });
 }
