@@ -101,15 +101,23 @@ function newGetUser(req, res) {
   var name_user = req.body.name_user;
   var password_user = req.body.password_user;
 
-  console.log(
-    "Retrieving user with name: ",
-    name_user,
-    "and password ",
-    password_user,
-    "..."
-  );
-  res.status(200).json({ success: true, data: "Found!" });
+  newGetUserFromDb(name_user, password_user, function (error, result) {
+    console.log("Back from the getPersonFromDb function with result: ", result);
 
+    if (error || result == null || result.length != 1) {
+      params = { user_id: user_id };
+      console.log("No user found!!");
+
+      // res.render("pages/userNotFound", params);
+
+      // to send response 500 error from the server if the user is not found:
+      res.status(500).json({ success: false, data: "No user found!" });
+    } else {
+      res.json(result[0]);
+
+      // res.render("pages/userFound", result[0]);
+    }
+  });
   // // call the function passing the typed id and the function which displays
   // // the result on the console
   // getUserFromDb(user_id, function (error, result) {
@@ -147,6 +155,36 @@ function getUserFromDb(user_id, callback) {
 
   // parameters saved as array (in this case we have only a value, id)
   var params = [user_id];
+
+  // postgres module, please go and run this query (sql) with this parameters (params) and when is done call the callback function
+  pool.query(sql, params, function (err, result) {
+    if (err) {
+      // if an error occurred, display the error to the console, showing what
+      // and where occurred.
+      console.log("An error with the DB occurred");
+      console.log(err);
+      callback(err, null);
+    }
+
+    // display the result as string from the json string
+    console.log("Found DB result: " + JSON.stringify(result.rows));
+
+    // once we got the result from DB, we pass it to the getUserFromDb
+    // function
+    callback(null, result.rows);
+  });
+}
+
+function newGetUserFromDb(name_user, password_user, callback) {
+  console.log("getUserFromDb called with name_user: ", name_user);
+
+  // sequel, declaring that the passed id will be an integer and it will be
+  // passed as first parameter
+  var sql =
+    "SELECT user_id, name_user, password, nickname FROM chat_user WHERE name_user = $1::char, password = $2::char";
+
+  // parameters saved as array (in this case we have only a value, id)
+  var params = [name_user, password_user];
 
   // postgres module, please go and run this query (sql) with this parameters (params) and when is done call the callback function
   pool.query(sql, params, function (err, result) {
