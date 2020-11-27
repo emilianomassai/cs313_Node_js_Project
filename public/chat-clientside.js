@@ -58,12 +58,6 @@ function signInUser() {
     function (data) {
       console.log("Back from the server with: ");
       console.log(data);
-
-      var name = data.name_user;
-      var password = data.password;
-
-      if (name) {
-      }
     }
   );
 }
