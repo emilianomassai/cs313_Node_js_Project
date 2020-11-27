@@ -60,4 +60,6 @@ function signInUser() {
   //     console.log(data);
   //   }
   // );
+
+  $("#resultFromServer").html("Hello!");
 }
