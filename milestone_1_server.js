@@ -202,8 +202,9 @@ function checkForUserFromDb(name_user, password, callback) {
 
 function addMessageToDB(message_user_id, message_text, callback) {
   // select from the database the correct user
+
   var sql =
-    "INSERT INTO chat_message message_user_id, message_text VALUES $1, $2";
+    "INSERT INTO chat_message(message_user_id, message_text) VALUES($1, $2)";
 
   var params = [message_user_id, message_text];
 
