@@ -200,9 +200,12 @@ function checkForUserFromDb(name_user, password, callback) {
 }
 
 function addMessageToDB(message_user_id, message_text) {
+  console.log("message_user_id: " + message_user_id);
+  console.log("message_text: " + message_text);
+
   var sql =
     "INSERT INTO chat_message(message_user_id, message_text) VALUES($1, $2)";
-  var params = ["1", "From params"];
+  var params = [message_user_id, message_text];
 
   pool.query(sql, params, function (err, result) {
     if (err) {
