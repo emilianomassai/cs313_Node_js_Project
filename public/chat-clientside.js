@@ -8,6 +8,7 @@ function searchUser() {
 
   if (user_id == "") {
     console.log("Please enter an user id!");
+    $("#resultFromServer").html("Please enter an user id!");
   } else {
     // 1. AJAX request to the server to search ///////////////////////////////////
     // In the same way we can do with $post() to interact with the server/////////
