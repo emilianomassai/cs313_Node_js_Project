@@ -90,9 +90,16 @@ function signInUser() {
           );
         } else {
           console.log("Back from the server with name user: ");
-          console.log(data.user_id);
+          console.log(data);
         }
       }
+    );
+
+    // TODO use the data.user_id to add the message to the right user
+    $.post(
+      "/addMessageToDB",
+      { message_user_id: data.user_id, message_text: message_user },
+      function (data) {}
     );
   }
 }
