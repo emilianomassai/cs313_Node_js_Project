@@ -11,40 +11,36 @@ function searchUser() {
 
   // call the method getUser from milestone_1_server.js and look for an user
   $.post("/getUser", { user_id: user_id }, function (data) {
-    if (data.name_user == "") {
-      console.log("No user with thad id in the database!");
-    } else {
-      console.log("Back from the server with: ");
-      console.log(data);
+    console.log("Back from the server with: ");
+    console.log(data);
 
-      var name = data.name_user;
-      var nickname = data.nickname;
-      var password = data.password;
+    var name = data.name_user;
+    var nickname = data.nickname;
+    var password = data.password;
 
-      // 2. Getting the data back from the server ////////////////////////////////
+    // 2. Getting the data back from the server ////////////////////////////////
 
-      // for loop to get elements of the list and take them out
-      // each of them as we go, to be able to display them into the html page
+    // for loop to get elements of the list and take them out
+    // each of them as we go, to be able to display them into the html page
 
-      // 3. Using the results to update the HTML page //////////////////////////
+    // 3. Using the results to update the HTML page //////////////////////////
 
-      $("#resultFromServer").html(
-        "An user is found in our database with the following info: " +
-          "<br>" +
-          "<li>" +
-          "Username: " +
-          name +
-          "</li>" +
-          "<li>" +
-          "Nickname: " +
-          nickname +
-          "</li>" +
-          "<li>" +
-          "Password: " +
-          password +
-          "</li>"
-      );
-    }
+    $("#resultFromServer").html(
+      "An user is found in our database with the following info: " +
+        "<br>" +
+        "<li>" +
+        "Username: " +
+        name +
+        "</li>" +
+        "<li>" +
+        "Nickname: " +
+        nickname +
+        "</li>" +
+        "<li>" +
+        "Password: " +
+        password +
+        "</li>"
+    );
   });
 }
 
