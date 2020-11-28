@@ -16,35 +16,42 @@ function searchUser() {
     // call the method getUser from milestone_1_server.js and look for an user
     $.post("/getUser", { user_id: user_id }, function (data) {
       console.log("Back from the server with: ");
-      console.log(data);
 
-      var name = data.name_user;
-      var nickname = data.nickname;
-      var password = data.password;
+      if (!data) {
+        $("#resultFromServer").html(
+          "No user found in the database with this id!"
+        );
+      } else {
+        console.log(data);
 
-      // 2. Getting the data back from the server ////////////////////////////////
+        var name = data.name_user;
+        var nickname = data.nickname;
+        var password = data.password;
 
-      // for loop to get elements of the list and take them out
-      // each of them as we go, to be able to display them into the html page
+        // 2. Getting the data back from the server ////////////////////////////////
 
-      // 3. Using the results to update the HTML page //////////////////////////
+        // for loop to get elements of the list and take them out
+        // each of them as we go, to be able to display them into the html page
 
-      $("#resultFromServer").html(
-        "An user is found in our database with the following info: " +
-          "<br>" +
-          "<li>" +
-          "Username: " +
-          name +
-          "</li>" +
-          "<li>" +
-          "Nickname: " +
-          nickname +
-          "</li>" +
-          "<li>" +
-          "Password: " +
-          password +
-          "</li>"
-      );
+        // 3. Using the results to update the HTML page //////////////////////////
+
+        $("#resultFromServer").html(
+          "An user is found in our database with the following info: " +
+            "<br>" +
+            "<li>" +
+            "Username: " +
+            name +
+            "</li>" +
+            "<li>" +
+            "Nickname: " +
+            nickname +
+            "</li>" +
+            "<li>" +
+            "Password: " +
+            password +
+            "</li>"
+        );
+      }
     });
   }
 }
