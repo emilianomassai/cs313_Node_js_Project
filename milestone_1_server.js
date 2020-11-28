@@ -113,7 +113,15 @@ function checkForUser(req, res) {
     console.log("Back from the getPersonFromDb function with result: ", result);
 
     if (error || result == null || result.length != 1) {
-      res.status(500).json({ success: false, data: "No user found!" });
+      res.json(
+        "No user found in the database with name" +
+          name +
+          " and password " +
+          password +
+          "."
+      );
+
+      // res.status(500).json({ success: false, data: "No user found!" });
     } else {
       res.json(result[0]);
     }
