@@ -56,9 +56,7 @@ function signInUser() {
   var name_user = $("#txtUser").val();
   var password_user = $("#txtPassword").val();
 
-  var checkForm = checkForm(name_user, password_user);
-
-  if (checkForm == true) {
+  if (name_user != "" && password_user != "") {
     console.log("Looking for", name_user, "with password", password_user);
 
     $.post(
@@ -70,12 +68,4 @@ function signInUser() {
       }
     );
   } else console.log("Please fill all the requested information!");
-}
-
-function checkForm(name_user, password_user) {
-  if (name_user != "" && password_user != "") {
-    return true;
-  } else {
-    return false;
-  }
 }
