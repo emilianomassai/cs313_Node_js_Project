@@ -91,12 +91,18 @@ function signInUser() {
         } else {
           console.log("Back from the server with name user: ");
           console.log(data);
+
+          $.post("/addMessageToDB", {
+            message_user_id: data.user_id,
+            message_text: message_user,
+          });
           console.log(
             "Message added from user_id: " +
               data.user_id +
               " with content: " +
               message_user
           );
+
           // TODO use the data.user_id to add the message to the right user
         }
       }
