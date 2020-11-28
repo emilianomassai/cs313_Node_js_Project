@@ -93,7 +93,15 @@ function getUser(req, res) {
   });
 }
 
-function newGetUser(req, res) {
+/*******************************************************************************
+ * FUNCTION: checkForUser
+ * This function is used from "signInUser()" function when the user press the
+ * "Sign In" button of the index.html page.
+ * It stores the data passed from "SignInUser()" and sends those values to
+ * "checkForUserFromDb()". With the callback function, we will get the results
+ * from the DB, once the data has been verified.
+ ******************************************************************************/
+function checkForUser(req, res) {
   console.log("Getting information from current user...");
 
   // to search for user by id, we need to do the following:
@@ -102,7 +110,7 @@ function newGetUser(req, res) {
   var password = req.body.password;
   // call the function passing the typed id and the function which displays
   // the result on the console
-  newGetUserFromDb(name, password, function (error, result) {
+  checkForUserFromDb(name, password, function (error, result) {
     console.log("Back from the getPersonFromDb function with result: ", result);
 
     if (error || result == null || result.length != 1) {
@@ -149,7 +157,14 @@ function getUserFromDb(user_id, callback) {
   });
 }
 
-function newGetUserFromDb(name_user, password, callback) {
+/*******************************************************************************
+ * FUNCTION: checkForUserFromDb
+ * This function is called from "checkForUser()". It takes the name_user and
+ * password from the user input and creates a query for the database.
+ * If the parameters match to one of the users in the database, the result is
+ * sent back to "checkForUser()". A "null" result is sent otherwise.
+ ******************************************************************************/
+function checkForUserFromDb(name_user, password, callback) {
   // sequel, declaring that the passed id will be an integer and it will be
   // passed as first parameter
   var sql =
@@ -171,7 +186,7 @@ function newGetUserFromDb(name_user, password, callback) {
     // display the result as string from the json string
     console.log("Found DB result: " + JSON.stringify(result.rows));
 
-    // once we got the result from DB, we pass it to the newGetUserFromDb
+    // once we got the result from DB, we pass it to the checkForUser()
     // function
     callback(null, result.rows);
   });

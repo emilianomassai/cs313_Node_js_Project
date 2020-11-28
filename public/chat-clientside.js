@@ -58,7 +58,7 @@ function signInUser() {
   console.log("Looking for", name_user, "with password", password_user);
 
   $.post(
-    "/newGetUser",
+    "/checkForUser",
     { name_user: name_user, password: password_user },
     function (data) {
       console.log("Back from the server with name user: ");
