@@ -10,8 +10,8 @@ function searchUser() {
   // In the same way we can do with $post() to interact with the server/////////
 
   // call the method getUser from milestone_1_server.js and look for an user
-  $.post("/getUser", { user_id: user_id }, function (err, data) {
-    if (err) {
+  $.post("/getUser", { user_id: user_id }, function (data) {
+    if (!data) {
       console.log("No user with thad id in the database!");
     } else {
       console.log("Back from the server with: ");
