@@ -44,6 +44,12 @@ function searchUser() {
   });
 }
 
+/****************************************************************************
+ * FUNCTION: SIGN IN USER
+ * This function takes the username and password prompted from the user and
+ * call send the values to other functions to check if the data match to
+ * the one in the database.
+ ***************************************************************************/
 function signInUser() {
   console.log("Sign in user ...");
 
