@@ -82,10 +82,10 @@ function getUser(req, res) {
     if (error || result == null || result.length != 1) {
       console.log("No user found!!");
 
-      // res.render("pages/userNotFound", params);
+      res.json("Error from DB!!");
 
       // to send response 500 error from the server if the user is not found:
-      res.status(500).json({ success: false, data: "No user found!" });
+      // res.status(500).json({ success: false, data: "No user found!" });
     } else {
       res.json(result[0]);
 
@@ -115,10 +115,7 @@ function checkForUser(req, res) {
     console.log("Back from the getPersonFromDb function with result: ", result);
 
     if (error || result == null || result.length != 1) {
-      console.log("Result error from DB: ", result);
-      res.json("Error from DB!!");
-
-      // res.status(500).json({ success: false, data: "No user found!" });
+      res.status(500).json({ success: false, data: "No user found!" });
     } else {
       res.json(result[0]);
     }
