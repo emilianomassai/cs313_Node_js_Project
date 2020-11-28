@@ -124,7 +124,7 @@ function checkForUser(req, res) {
 
       // res.status(500).json({ success: false, data: "No user found!" });
     } else {
-      res.json(result[0][0]);
+      res.json(result[0][user_id]);
     }
   });
 }
