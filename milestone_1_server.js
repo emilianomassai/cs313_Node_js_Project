@@ -23,7 +23,9 @@ const pool = new Pool({ connectionString: connectionString });
 app.set("port", process.env.PORT || 5000);
 
 app.post("/getUser", getUser);
-app.post("/newGetUser", newGetUser);
+
+// before log in, check if the data matches one of the users in the DB
+app.post("/checkForUser", checkForUser);
 
 // from index sign-in page, when signing in, the user access to
 // the welcome page of the chat app
