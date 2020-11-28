@@ -92,10 +92,28 @@ function signInUser() {
           console.log("Back from the server with name user: ");
           console.log(data);
 
-          // $.post("/addMessageToDB", {
-          //   message_user_id: data.user_id,
-          //   message_text: message_user,
-          // });
+          $.post(
+            "/addMessageToDB",
+            {
+              message_user_id: data.user_id,
+              message_text: message_user,
+            },
+            function (dataMessage) {
+              if (!dataMessage.user_id) {
+                console.log(
+                  "The message can't be saved into the DB for an error!"
+                );
+
+                $("#sendMessageOutput").html(
+                  "The message can't be saved into the DB for an error!"
+                );
+              } else {
+                console.log("Back from the server with name user: ");
+                console.log(dataMessage);
+              }
+            }
+          );
+
           console.log(
             "Message added from user_id: " +
               data.user_id +
