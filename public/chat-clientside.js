@@ -112,16 +112,15 @@ function signInUser() {
 }
 
 function saveMessageToDB(user_id, message) {
-  console.log("Saving message ...");
 
-  console.log(
-    "FROM saveMessageToDB: Adding to user with id ",
-    user_id,
-    " the following message: ",
-    message
-  );
 
   $.post(
+    console.log(
+      "FROM POST saveMessageToDB: Adding to user with id ",
+      user_id,
+      " the following message: ",
+      message
+    );
     "/addMessageToDB",
     { message_user_id: user_id, message_text: message },
     function (data) {
