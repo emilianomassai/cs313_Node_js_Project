@@ -26,6 +26,7 @@ function searchUser() {
       } else {
         console.log(data);
 
+        var user_id = user_id;
         var name = data.name_user;
         var nickname = data.nickname;
         var password = data.password;
@@ -51,6 +52,10 @@ function searchUser() {
             "<li>" +
             "Password: " +
             password +
+            "</li>" +
+            "<li>" +
+            "User Id: " +
+            user_id +
             "</li>"
         );
       }
@@ -67,7 +72,6 @@ function searchUser() {
 function signInUser() {
   console.log("Sign in user ...");
 
-  var idUser = "";
   var name_user = $("#txtUser").val();
   var password_user = $("#txtPassword").val();
   var message_user = $("#txtMessage").val();
@@ -91,7 +95,6 @@ function signInUser() {
           );
         } else {
           console.log("Back from the server with name user: ");
-          idUser = data.user_id;
           console.log(data);
 
           console.log(
@@ -106,24 +109,26 @@ function signInUser() {
       }
     );
 
-    $.post(
-      "/addMessageToDB",
-      {
-        message_user_id: idUser,
-        message_text: message_user,
-      },
-      function (dataMessage) {
-        if (!dataMessage.user_id) {
-          console.log("The message can't be saved into the DB for an error!");
+    // $.post(
+    //         "/addMessageToDB",
+    //         {
+    //           message_user_id: data.user_id,
+    //           message_text: message_user,
+    //         },
+    //         function (dataMessage) {
+    //           if (!dataMessage.user_id) {
+    //             console.log(
+    //               "The message can't be saved into the DB for an error!"
+    //             );
 
-          $("#sendMessageOutput").html(
-            "The message can't be saved into the DB for an error!"
-          );
-        } else {
-          console.log("Back from the server with name user: ");
-          console.log(dataMessage);
-        }
-      }
-    );
+    //             $("#sendMessageOutput").html(
+    //               "The message can't be saved into the DB for an error!"
+    //             );
+    //           } else {
+    //             console.log("Back from the server with name user: ");
+    //             console.log(dataMessage);
+    //           }
+    //         }
+    //       );
   }
 }
