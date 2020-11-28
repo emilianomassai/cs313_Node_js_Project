@@ -6,17 +6,15 @@ function searchUser() {
   var user_id = $("#user_id").val();
   console.log("User id: " + user_id);
 
-  // 1. AJAX request to the server to search ///////////////////////////////////
-  // In the same way we can do with $post() to interact with the server/////////
+  if (user_id == "") {
+    console.log("Please enter an user id!");
+  } else {
+    // 1. AJAX request to the server to search ///////////////////////////////////
+    // In the same way we can do with $post() to interact with the server/////////
 
-  // call the method getUser from milestone_1_server.js and look for an user
-  $.post("/getUser", { user_id: user_id }, function (data) {
-    console.log("Back from the server with: ");
-    if (!data) {
-      $("#resultFromServer").html(
-        "No user found with that Id. Please try again."
-      );
-    } else {
+    // call the method getUser from milestone_1_server.js and look for an user
+    $.post("/getUser", { user_id: user_id }, function (data) {
+      console.log("Back from the server with: ");
       console.log(data);
 
       var name = data.name_user;
@@ -46,8 +44,8 @@ function searchUser() {
           password +
           "</li>"
       );
-    }
-  });
+    });
+  }
 }
 
 /****************************************************************************
