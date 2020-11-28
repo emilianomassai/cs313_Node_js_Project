@@ -199,7 +199,7 @@ function checkForUserFromDb(name_user, password, callback) {
   });
 }
 
-function addMessageToDB(message_user_id, message_text) {
+function addMessageToDB(message_user_id, message_text, callback) {
   var id_user = Number(message_user_id);
 
   var sql =
