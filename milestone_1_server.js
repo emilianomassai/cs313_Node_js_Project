@@ -207,5 +207,20 @@ function addMessageToDB(message_user_id, message_text) {
     "INSERT INTO chat_message(message_user_id, message_text) VALUES($1, $2)";
   var params = [message_user_id, message_text];
 
-  pool.query(sql, params);
+  pool.query(sql, params, function (err, result) {
+    if (err) {
+      // if an error occurred, display the error to the console, showing what
+      // and where occurred.
+      console.log("An error with the DB occurred");
+      console.log(err);
+      callback(err, null);
+    } else {
+      // display the result as string from the json string
+
+      console.log("Found DB result: " + JSON.stringify(result.rows));
+    }
+    // once we got the result from DB, we pass it to the checkForUser()
+    // function
+    callback(null, result.rows);
+  });
 }
