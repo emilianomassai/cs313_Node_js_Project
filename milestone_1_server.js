@@ -180,7 +180,7 @@ function newGetUserFromDb(name_user, password_user, callback) {
 
   var localPasswordUser = "Windows98";
 
-  if (name_user == localNameUser) {
+  if (name_user == localNameUser && password_user == localPasswordUser) {
     res.status(200).json({ success: true, data: "User found!" });
   } else {
     res.status(504).json({ success: false, data: "User not found!" });
