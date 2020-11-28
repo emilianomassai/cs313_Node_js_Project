@@ -57,7 +57,9 @@ function signInUser() {
   var password_user = $("#txtPassword").val();
   var message_user = $("#txtMessage").val();
 
-  if (name_user != "" || password_user != "" || message_user != "") {
+  if (name_user == "" || password_user == "" || message_user == "") {
+    console.log("Please fill all the requested information!");
+  } else {
     console.log("Form filled as required. Looking for some data ...");
     console.log("Looking for", name_user, "with password", password_user);
 
@@ -69,5 +71,5 @@ function signInUser() {
         console.log(data);
       }
     );
-  } else console.log("Please fill all the requested information!");
+  }
 }
