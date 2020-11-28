@@ -68,7 +68,11 @@ function signInUser() {
       { name_user: name_user, password: password_user },
       function (data) {
         console.log("Back from the server with name user: ");
-        console.log(data);
+        if (data == null) {
+          console.log("ERROR FROM SERVER!");
+        } else {
+          console.log(data);
+        }
       }
     );
   }
