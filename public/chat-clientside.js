@@ -68,13 +68,17 @@ function signInUser() {
     console.log("Form filled as required. Looking for some data ...");
     console.log("Looking for", name_user, "with password", password_user);
 
-    $.post(
-      "/checkForUser",
-      { name_user: name_user, password: password_user },
-      function (data) {
-        console.log("Back from the server with name user: ");
-        console.log(data);
-      }
-    );
+    if (data == null) {
+      console.log("ERROR!");
+    } else {
+      $.post(
+        "/checkForUser",
+        { name_user: name_user, password: password_user },
+        function (data) {
+          console.log("Back from the server with name user: ");
+          console.log(data);
+        }
+      );
+    }
   }
 }
