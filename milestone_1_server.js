@@ -190,8 +190,10 @@ function checkForUserFromDb(name_user, password, message, callback) {
       callback(err, null);
     } else {
       // display the result as string from the json string
-      console.log("This is the message to store in the database: " + message);
+
       console.log("Found DB result: " + JSON.stringify(result.rows));
+      var logged_user_Id = sql.user_id;
+      console.log("Found DB result: " + logged_user_Id);
     }
     // once we got the result from DB, we pass it to the checkForUser()
     // function
