@@ -124,7 +124,7 @@ function checkForUser(req, res) {
 
       // res.status(500).json({ success: false, data: "No user found!" });
     } else {
-      res.json(result[0]);
+      res.json(result[0][0]);
     }
   });
 }
@@ -192,8 +192,6 @@ function checkForUserFromDb(name_user, password, message, callback) {
       // display the result as string from the json string
 
       console.log("Found DB result: " + JSON.stringify(result.rows));
-      var logged_user_Id = sql.user_id;
-      console.log("Found DB result: " + logged_user_Id);
     }
     // once we got the result from DB, we pass it to the checkForUser()
     // function
