@@ -118,7 +118,8 @@ function checkForUser(req, res) {
     if (error || result == null || result.length != 1) {
       res.status(500).json({ success: false, data: "No user found!" });
     } else {
-      res.json(result[0]);
+      res.render("pages/userFound");
+      // res.json(result[0]);
     }
   });
 }
