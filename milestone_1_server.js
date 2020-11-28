@@ -27,6 +27,8 @@ app.post("/getUser", getUser);
 // before log in, check if the data matches one of the users in the DB
 app.post("/checkForUser", checkForUser);
 
+//
+
 // from index sign-in page, when signing in, the user access to
 // the welcome page of the chat app
 app.post("/welcome_page", welcomePage);
@@ -103,13 +105,12 @@ function getUser(req, res) {
 function checkForUser(req, res) {
   console.log("Getting information from current user...");
 
-  // to search for user by id, we need to do the following:
-  // var user_id = req.query.user_id;
   var name = req.body.name_user;
   var password = req.body.password;
+  var message = req.body.message;
   // call the function passing the typed id and the function which displays
   // the result on the console
-  checkForUserFromDb(name, password, function (error, result) {
+  checkForUserFromDb(name, password, message, function (error, result) {
     console.log("Back from the getPersonFromDb function with result: ", result);
 
     if (error || result == null || result.length != 1) {
@@ -171,9 +172,8 @@ function getUserFromDb(user_id, callback) {
  * If the parameters match to one of the users in the database, the result is
  * sent back to "checkForUser()". A "null" result is sent otherwise.
  ******************************************************************************/
-function checkForUserFromDb(name_user, password, callback) {
-  // sequel, declaring that the passed id will be an integer and it will be
-  // passed as first parameter
+function checkForUserFromDb(name_user, password, message, callback) {
+  // select from the database the correct user
   var sql =
     "SELECT user_id, name_user, password, nickname FROM chat_user WHERE name_user = $1 AND password = $2";
 
@@ -188,11 +188,11 @@ function checkForUserFromDb(name_user, password, callback) {
       console.log("An error with the DB occurred");
       console.log(err);
       callback(err, null);
+    } else {
+      // display the result as string from the json string
+      console.log("This is the message to store in the database: " + message);
+      console.log("Found DB result: " + JSON.stringify(result.rows));
     }
-
-    // display the result as string from the json string
-    console.log("Found DB result: " + JSON.stringify(result.rows));
-
     // once we got the result from DB, we pass it to the checkForUser()
     // function
     callback(null, result.rows);
