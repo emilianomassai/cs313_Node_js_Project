@@ -82,9 +82,11 @@ function signInUser() {
       { name_user: name_user, password: password_user },
       function (data) {
         if (!data.name_user) {
-          console.log("The current user is not logged in!");
+          console.log("The current user is not signed in!");
 
-          $("#sendMessageOutput").html("Please log in before send a message!");
+          $("#sendMessageOutput").html(
+            "Please sign in to use the application!"
+          );
         } else {
           console.log("Back from the server with name user: ");
           console.log(data);
