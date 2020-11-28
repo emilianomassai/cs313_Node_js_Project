@@ -27,9 +27,6 @@ app.post("/getUser", getUser);
 // before log in, check if the data matches one of the users in the DB
 app.post("/checkForUser", checkForUser);
 
-// add message from user to the DB
-app.post("/addMessageToDB", addMessageToDB);
-
 // from index sign-in page, when signing in, the user access to
 // the welcome page of the chat app
 app.post("/welcome_page", welcomePage);
@@ -198,15 +195,4 @@ function checkForUserFromDb(name_user, password, callback) {
     // function
     callback(null, result.rows);
   });
-}
-
-function addMessageToDB(message_user_id, message_text) {
-  console.log(
-    "Message added from user_id: " +
-      message_user_id +
-      " with content: " +
-      message_text
-  );
-
-  // select from the database the correct user
 }
