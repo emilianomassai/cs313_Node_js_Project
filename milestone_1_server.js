@@ -108,7 +108,6 @@ function checkForUser(req, res) {
 
   var name = req.body.name_user;
   var password = req.body.password;
-  var message = req.body.message;
   // call the function passing the typed id and the function which displays
   // the result on the console
   checkForUserFromDb(name, password, function (error, result) {
@@ -203,7 +202,7 @@ function checkForUserFromDb(name_user, password, callback) {
 function addMessageToDB(message_user_id, message_text) {
   var sql =
     "INSERT INTO chat_message(message_user_id, message_text) VALUES($1, $2)";
-  var params = [message_user_id, message_text];
+  var params = ["1", "From params"];
 
   pool.query(sql, params, function (err, result) {
     if (err) {
