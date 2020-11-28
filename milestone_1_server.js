@@ -103,7 +103,7 @@ function newGetUser(req, res) {
 
   // call the function passing the typed id and the function which displays
   // the result on the console
-  getUserFromDb(name, password, function (error, result) {
+  newGetUserFromDb(name, password, function (error, result) {
     console.log("Back from the getPersonFromDb function with result: ", result);
 
     // if (error || result == null || result.length != 1) {
