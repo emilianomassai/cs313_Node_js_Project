@@ -73,6 +73,7 @@ function signInUser() {
 
   if (name_user == "" || password_user == "" || message_user == "") {
     console.log("Please fill all the requested information!");
+    $("#sendMessageOutput").html("Please fill all the requested information!");
   } else {
     console.log("Form filled as required. Looking for some data ...");
     console.log("Looking for", name_user, "with password", password_user);
