@@ -80,7 +80,6 @@ function getUser(req, res) {
     console.log("Back from the getPersonFromDb function with result: ", result);
 
     if (error || result == null || result.length != 1) {
-      params = { user_id: user_id };
       console.log("No user found!!");
 
       // res.render("pages/userNotFound", params);
@@ -88,7 +87,7 @@ function getUser(req, res) {
       // to send response 500 error from the server if the user is not found:
       res.status(500).json({ success: false, data: "No user found!" });
     } else {
-      res.json(result[0]);
+      res.json(error, result[0]);
 
       // res.render("pages/userFound", result[0]);
     }
