@@ -50,7 +50,11 @@
 
     <div>
       <h1>Log In:</h1>
-      <p>Please enter your username and password.</p>
+      <p>
+        Please enter your username, password and a message to see it displayed
+        below. If the username and password doesn't match, the message will not
+        be saved in the database.
+      </p>
       <h4>Username</h4>
       <input type="text" id="txtUser" name="txtUser" placeholder="Username" />
 
@@ -62,6 +66,16 @@
         name="txtPassword"
         placeholder="Password"
       />
+
+      <h4>Message</h4>
+
+      <textarea
+        placeholder="Your message here ..."
+        name="txtMessage"
+        id="txtMessage"
+        cols="50"
+        rows="5"
+      ></textarea>
       <br />
       <br />
       <br />
