@@ -18,6 +18,8 @@ function searchUser() {
       console.log("Back from the server with: ");
 
       if (!data.name_user) {
+        console.log("No user in DB");
+
         $("#resultFromServer").html(
           "No user found in the database with this id!"
         );
