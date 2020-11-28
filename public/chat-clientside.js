@@ -67,6 +67,7 @@ function searchUser() {
 function signInUser() {
   console.log("Sign in user ...");
 
+  var idUser = "";
   var name_user = $("#txtUser").val();
   var password_user = $("#txtPassword").val();
   var message_user = $("#txtMessage").val();
@@ -90,6 +91,7 @@ function signInUser() {
           );
         } else {
           console.log("Back from the server with name user: ");
+          idUser = data.user_id;
           console.log(data);
 
           console.log(
@@ -107,7 +109,7 @@ function signInUser() {
     $.post(
       "/addMessageToDB",
       {
-        message_user_id: data.user_id,
+        message_user_id: idUser,
         message_text: message_user,
       },
       function (dataMessage) {
