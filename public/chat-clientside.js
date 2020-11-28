@@ -90,7 +90,7 @@ function signInUser() {
           );
         } else {
           console.log("Back from the server with name user: ");
-          console.log(data);
+          console.log(data.user_id);
         }
       }
     );
