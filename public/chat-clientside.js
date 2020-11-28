@@ -86,7 +86,7 @@ function signInUser() {
           console.log("The current user is not signed in!");
 
           $("#sendMessageOutput").html(
-            "Please enter with your username and password to be able to send a message!"
+            "Please enter your username and password to be able to send a message!"
           );
         } else {
           console.log("Back from the server with name user: ");
