@@ -212,7 +212,7 @@ function addMessageToDB(message_user_id, message_text) {
     if (err) {
       // if an error occurred, display the error to the console, showing what
       // and where occurred.
-      console.log("An error with the DB occurred");
+      console.log("An error with the DB occurred.");
       console.log(err);
       callback(err, null);
     } else {

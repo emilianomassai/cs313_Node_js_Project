@@ -125,7 +125,7 @@ function saveMessageToDB(user_id, message) {
     "/addMessageToDB",
     { message_user_id: user_id, message_text: message },
     function (data) {
-      console.log("Back from the server with name user: ");
+      console.log("From the server with name user: ");
       console.log(data);
 
       // TODO use the data.user_id to add the message to the right user
