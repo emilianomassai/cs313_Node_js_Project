@@ -110,7 +110,7 @@ function checkForUser(req, res) {
   var message = req.body.message;
   // call the function passing the typed id and the function which displays
   // the result on the console
-  checkForUserFromDb(name, password, message, function (error, result) {
+  checkForUserFromDb(name, password, function (error, result) {
     console.log("Back from the getPersonFromDb function with result: ", result);
 
     if (error || result == null || result.length != 1) {
@@ -124,7 +124,7 @@ function checkForUser(req, res) {
 
       // res.status(500).json({ success: false, data: "No user found!" });
     } else {
-      res.json(result[0]);
+      res.json(result[0].user_id);
     }
   });
 }
@@ -172,7 +172,7 @@ function getUserFromDb(user_id, callback) {
  * If the parameters match to one of the users in the database, the result is
  * sent back to "checkForUser()". A "null" result is sent otherwise.
  ******************************************************************************/
-function checkForUserFromDb(name_user, password, message, callback) {
+function checkForUserFromDb(name_user, password, callback) {
   // select from the database the correct user
   var sql =
     "SELECT user_id, name_user, password, nickname FROM chat_user WHERE name_user = $1 AND password = $2";
