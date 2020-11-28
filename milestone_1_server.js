@@ -119,6 +119,7 @@ function checkForUser(req, res) {
       res.status(500).json({ success: false, data: "No user found!" });
     } else {
       res.json(result[0]);
+      res.render("pages/welcome_page", result[0]);
     }
   });
 }
