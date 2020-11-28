@@ -221,6 +221,6 @@ function addMessageToDB(message_user_id, message_text) {
     }
     // once we got the result from DB, we pass it to the checkForUser()
     // function
-    callback(null, result.rows);
+    // callback(null, result.rows);
   });
 }
