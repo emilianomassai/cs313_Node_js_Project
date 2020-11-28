@@ -85,7 +85,7 @@ function getUser(req, res) {
       res.json("Error from DB!!");
 
       // to send response 500 error from the server if the user is not found:
-      // res.status(500).json({ success: false, data: "No user found!" });
+      res.status(500).json({ success: false, data: "No user found!" });
     } else {
       res.json(result[0]);
 
