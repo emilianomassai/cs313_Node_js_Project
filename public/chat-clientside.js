@@ -57,6 +57,7 @@ function signInUser() {
   var password_user = $("#txtPassword").val();
 
   if (name_user != "" && password_user != "") {
+    console.log("Form filled as required. Looking for some data ...");
     console.log("Looking for", name_user, "with password", password_user);
 
     $.post(
