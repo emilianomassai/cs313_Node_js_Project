@@ -62,8 +62,6 @@ function signInUser() {
     { name_user: name_user, password: password_user },
     function (data) {
       console.log("Back from the server with name user: ");
-      res.render("pages/welcome_page", result[0]);
-
       console.log(data);
     }
   );
