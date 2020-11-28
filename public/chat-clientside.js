@@ -26,7 +26,7 @@ function searchUser() {
       } else {
         console.log(data);
 
-        var user_id = user_id;
+        var user_id = data.user_id;
         var name = data.name_user;
         var nickname = data.nickname;
         var password = data.password;
