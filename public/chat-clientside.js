@@ -11,7 +11,7 @@ function searchUser() {
 
   // call the method getUser from milestone_1_server.js and look for an user
   $.post("/getUser", { user_id: user_id }, function (data) {
-    if (!data) {
+    if (data.name_user == "") {
       console.log("No user with thad id in the database!");
     } else {
       console.log("Back from the server with: ");
