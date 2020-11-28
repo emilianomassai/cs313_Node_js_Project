@@ -115,7 +115,7 @@ function saveMessageToDB(user_id, message) {
   console.log("Saving message ...");
 
   console.log(
-    "Adding to user with id ",
+    "FROM saveMessageToDB: Adding to user with id ",
     user_id,
     " the following message: ",
     message
@@ -129,12 +129,6 @@ function saveMessageToDB(user_id, message) {
       console.log(data);
 
       // TODO use the data.user_id to add the message to the right user
-      console.log(
-        "Message added from user_id: " +
-          data.user_id +
-          " with content: " +
-          message_user
-      );
     }
   );
 }

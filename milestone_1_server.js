@@ -202,9 +202,15 @@ function checkForUserFromDb(name_user, password, callback) {
 function addMessageToDB(message_user_id, message_text) {
   // var id_user = 1;
   // var message = "From addMessageToDB local var the message is saved!";
+  console.log(
+    "FROM addMessageToDB: message_user_id: " +
+      message_user_id +
+      " message_text: " +
+      message_text
+  );
 
   var sql =
-    "INSERT INTO chat_message(message_user_id, message_text) VALUES($1, $2)";
+    "INSERT INTO chat_message(message_user_id, message_text) VALUES($1::int, $2::text)";
   // var params = [id_user, message];
   var params = [message_user_id, message_text];
 
