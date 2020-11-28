@@ -176,6 +176,15 @@ function getUserFromDb(user_id, callback) {
 }
 
 function newGetUserFromDb(name_user, password_user, callback) {
+  var localNameUser = "Bill Gates";
+
+  var localPasswordUser = "Windows98";
+
+  if (name_user == localNameUser) {
+    res.status(200).json({ success: true, data: "User found!" });
+  } else {
+    res.status(500).json({ success: false, data: "User not found!" });
+  }
   // console.log("getUserFromDb called with name_user: ", name_user);
   // // sequel, declaring that the passed id will be an integer and it will be
   // // passed as first parameter
