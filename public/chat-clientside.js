@@ -51,12 +51,8 @@ function signInUser() {
   var password_user = $("#txtPassword").val();
   console.log("Looking for", name_user, "with password", password_user);
 
-  $.post(
-    "/newGetUser",
-    { name_user: name_user, password: password_user },
-    function (data) {
-      console.log("Back from the server with: ");
-      console.log(data);
-    }
-  );
+  $.post("/newGetUser", { name_user: name_user }, function (data) {
+    console.log("Back from the server with: ");
+    console.log(data);
+  });
 }

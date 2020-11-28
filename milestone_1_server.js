@@ -99,22 +99,20 @@ function newGetUser(req, res) {
   // to search for user by id, we need to do the following:
   // var user_id = req.query.user_id;
   var name = req.body.name_user;
-  var password = req.body.password_user;
 
   // call the function passing the typed id and the function which displays
   // the result on the console
-  newGetUserFromDb(name, password, function (error, result) {
+  newGetUserFromDb(name, function (error, result) {
     console.log("Back from the getPersonFromDb function with result: ", result);
 
-    // if (error || result == null || result.length != 1) {
-    //   params = { user_id: user_id };
-    //   console.log("No user found!!");
+    if (error || result == null || result.length != 1) {
+      params = { name_user: name };
+      console.log("No user found!!");
 
-    //   res.status(500).json({ success: false, data: "No user found!" });
-    // } else {
-    //   res.json(result[0]);
-
-    // }
+      res.status(500).json({ success: false, data: "No user found!" });
+    } else {
+      res.json(result[0]);
+    }
   });
 }
 /*******************************************************************************
@@ -154,6 +152,30 @@ function getUserFromDb(user_id, callback) {
   });
 }
 
-function newGetUserFromDb(name_user, password_user, callback) {
-  res.status(200).json({ success: true, data: "User found!" });
+function newGetUserFromDb(name_user, callback) {
+  // sequel, declaring that the passed id will be an integer and it will be
+  // passed as first parameter
+  var sql =
+    "SELECT user_id, name_user, password, nickname FROM chat_user WHERE name_user = $1";
+
+  // parameters saved as array (in this case we have only a value, id)
+  var params = [name_user];
+
+  // postgres module, please go and run this query (sql) with this parameters (params) and when is done call the callback function
+  pool.query(sql, params, function (err, result) {
+    if (err) {
+      // if an error occurred, display the error to the console, showing what
+      // and where occurred.
+      console.log("An error with the DB occurred");
+      console.log(err);
+      callback(err, null);
+    }
+
+    // display the result as string from the json string
+    console.log("Found DB result: " + JSON.stringify(result.rows));
+
+    // once we got the result from DB, we pass it to the newGetUserFromDb
+    // function
+    callback(null, result.rows);
+  });
 }
