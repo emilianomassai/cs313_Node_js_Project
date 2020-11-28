@@ -30,6 +30,7 @@ app.post("/checkForUser", checkForUser);
 // from index sign-in page, when signing in, the user access to
 // the welcome page of the chat app
 app.post("/welcome_page", welcomePage);
+app.get("/welcome_page", welcomePage);
 
 // // views is directory for all template files
 app.set("views", __dirname + "/views");
@@ -118,8 +119,7 @@ function checkForUser(req, res) {
     if (error || result == null || result.length != 1) {
       res.status(500).json({ success: false, data: "No user found!" });
     } else {
-      // res.json(result[0]);
-      res.render("pages/welcome_page", result[0]);
+      res.json(result[0]);
     }
   });
 }
