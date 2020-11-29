@@ -200,12 +200,39 @@ function checkForUserFromDb(name_user, password, callback) {
   });
 }
 
-function addMessageToDB(message_user_id, message_text, callback) {
+// function addMessageToDB(message_user_id, message_text, callback) {
+//   var sql =
+//     "INSERT INTO chat_message(message_user_id, message_text) VALUES($1::int, $2::text)";
+//   // var params = [id_user, message_text];
+
+//   var params = [message_user_id, message_text];
+
+//   pool.query(sql, params, function (err, result) {
+//     if (err) {
+//       // if an error occurred, display the error to the console, showing what
+//       // and where occurred.
+//       console.log("An error with the DB occurred.");
+//       console.log(err);
+//       callback(err, null);
+//     } else {
+//       // display the result as string from the json string
+
+//       console.log("Found DB result: " + JSON.stringify(result.rows));
+//     }
+//     // once we got the result from DB, we pass it to the checkForUser()
+//     // function
+//     callback(null, result.rows);
+//   });
+// }
+
+function addMessageToDB(req, res) {
+  var user_id = req.body.message_user_id;
+  var user_message = req.body.message_text;
   var sql =
     "INSERT INTO chat_message(message_user_id, message_text) VALUES($1::int, $2::text)";
   // var params = [id_user, message_text];
 
-  var params = [message_user_id, message_text];
+  var params = [user_id, user_message];
 
   pool.query(sql, params, function (err, result) {
     if (err) {
@@ -221,6 +248,6 @@ function addMessageToDB(message_user_id, message_text, callback) {
     }
     // once we got the result from DB, we pass it to the checkForUser()
     // function
-    callback(null, result.rows);
+    callback(null, res.rows);
   });
 }

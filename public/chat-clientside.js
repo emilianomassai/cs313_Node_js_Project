@@ -111,16 +111,16 @@ function signInUser() {
   }
 }
 
-function saveMessageToDB(user, message) {
+function saveMessageToDB(user_id, message_user) {
   console.log(
     "FROM saveMessageToDB: Adding to user with id ",
-    user,
+    user_id,
     " the following message: ",
-    message
+    message_user
   );
   $.post(
     "/addMessageToDB",
-    { message_user_id: user, message_text: message },
+    { message_user_id: user_id, message_text: message_user },
     function (data) {
       console.log("From the server with name user: ");
       console.log(data);
