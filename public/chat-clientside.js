@@ -73,15 +73,15 @@ function searchMessages(user_id) {
     console.log(data);
     console.log("Back from the server with: ");
 
-    if (!data.message_user_id) {
-      console.log("No message found!");
+    // if (!data.message_user_id) {
+    //   console.log("No message found!");
 
-      $("#resultFromServer").html("No message found in the database!");
-    } else {
-      console.log(data);
+    //   $("#resultFromServer").html("No message found in the database!");
+    // } else {
+    //   console.log(data);
 
-      var message_user_id = data.message_user_id;
-      var message_text = data.message_text;
+      // var message_user_id = data.message_user_id;
+      // var message_text = data.message_text;
 
       // 2. Getting the data back from the server ////////////////////////////////
 
@@ -98,7 +98,7 @@ function searchMessages(user_id) {
         //   message_text +
         //   "</li>"
       );
-    }
+    // }
   });
 }
 
