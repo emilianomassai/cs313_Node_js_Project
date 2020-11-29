@@ -119,6 +119,8 @@ function getMessages(req, res) {
     if (error || result == null || result.length != 1) {
       res.json("No user found in the database with id " + user_id + ".");
 
+      res.status(508).json({ success: false, data: "No message found!" });
+
       // to send response 500 error from the server if the user is not found:
       // res.status(500).json({ success: false, data: "No user found!" });
     } else {
