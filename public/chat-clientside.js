@@ -143,7 +143,7 @@ function displayAllMessages(user_id) {
   $.post("/getMessagesFromDB", { message_user_id: user_id }, function (data) {
     console.log(data);
 
-    var message = data.message_text[0];
+    var message = data.message_text;
     $("#resultFromServer").html(
       "this is the first message from user: " + message
     );

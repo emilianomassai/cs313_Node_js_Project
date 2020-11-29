@@ -251,6 +251,6 @@ function getMessagesFromDB(req, res) {
     }
     // once we got the result from DB, we pass it to the checkForUser()
     // function
-    callback(null, result.rows);
+    res.json(result[0]);
   });
 }
