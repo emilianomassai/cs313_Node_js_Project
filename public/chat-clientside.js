@@ -117,7 +117,7 @@ function signInUser() {
 
 function saveMessageToDB(user, message) {
   console.log(
-    "FROM saveMessageToDB: Adding to user with id ",
+    "FROM saveMessageToDB : Adding to user with id ",
     user,
     " the following message: ",
     message
