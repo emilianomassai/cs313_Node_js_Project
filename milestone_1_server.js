@@ -124,7 +124,7 @@ function getMessages(req, res) {
       // to send response 500 error from the server if the user is not found:
       // res.status(500).json({ success: false, data: "No user found!" });
     } else {
-      res.json(result[0]);
+      res.json(result);
 
       // res.render("pages/userFound", result[0]);
     }
