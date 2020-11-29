@@ -248,6 +248,6 @@ function addMessageToDB(req, res) {
     }
     // once we got the result from DB, we pass it to the checkForUser()
     // function
-    callback(null, res.rows);
+    callback(null, result.rows);
   });
 }
