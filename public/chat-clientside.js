@@ -1,3 +1,6 @@
+var user;
+var message;
+
 function searchUser() {
   console.log("Searching user ...");
 
@@ -105,22 +108,24 @@ function signInUser() {
               " with content: " +
               message_user
           );
+          user = data.user_id;
+          message = message_user;
         }
       }
     );
   }
 }
 
-function saveMessageToDB(user_id, message) {
+function saveMessageToDB(user, message) {
   console.log(
     "FROM saveMessageToDB: Adding to user with id ",
-    user_id,
+    user,
     " the following message: ",
     message
   );
   $.post(
     "/addMessageToDB",
-    { message_user_id: user_id, message_text: message },
+    { message_user_id: user, message_text: message },
     function (data) {
       console.log("From the server with name user: ");
       console.log(data);
