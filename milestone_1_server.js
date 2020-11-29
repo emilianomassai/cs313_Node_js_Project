@@ -107,7 +107,9 @@ function checkForUser(req, res) {
   console.log("Getting information from current user...");
 
   var name = req.body.name_user;
-  var password = req.body.password;
+  var password = req.body.password_user;
+
+  var message = req.body.message_user;
   // call the function passing the typed id and the function which displays
   // the result on the console
   checkForUserFromDb(name, password, function (error, result) {
