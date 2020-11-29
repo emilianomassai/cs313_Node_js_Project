@@ -91,14 +91,12 @@ function searchMessages(user_id) {
       // 3. Using the results to update the HTML page //////////////////////////
 
       $("#sendMessageOutput").html(
-        "The messages from the DB are: " +
-          "<br>" +
-          "<li>" +
-          "User ID: " +
-          message_user_id +
-          "Message: " +
-          message_text +
-          "</li>"
+        "The messages from the DB are: " + "<br>" + "<li>" + "User ID: "
+        // +
+        //   message_user_id +
+        //   "Message: " +
+        //   message_text +
+        //   "</li>"
       );
     }
   });
