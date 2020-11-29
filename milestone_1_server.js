@@ -274,11 +274,11 @@ function addMessageToDB(req, res) {
       console.log("An error with the DB occurred.");
       console.log(err);
       callback(err, null);
-    } else {
+    }
       // display the result as string from the json string
 
       console.log("Found DB result: " + JSON.stringify(result.rows));
-    }
+
     // once we got the result from DB, we pass it to the checkForUser()
     // function
     callback(null, result.rows);
