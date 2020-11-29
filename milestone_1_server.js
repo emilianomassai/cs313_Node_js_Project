@@ -264,7 +264,6 @@ function addMessageToDB(req, res) {
   var user_message = req.body.message_text;
   var sql =
     "INSERT INTO chat_message(message_user_id, message_text) VALUES($1::int, $2::text)";
-  // var params = [id_user, message_text];
 
   var params = [user_id, user_message];
 
