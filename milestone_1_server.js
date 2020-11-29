@@ -132,10 +132,9 @@ function getMessages(req, res) {
 }
 
 function getMessagesFromDB(user_id, callback) {
-  var message_user_id = 1;
   var sql =
-    "SELECT message_text FROM chat_message WHERE message_user_id = $1::int AND message_user_id = $2::int";
-  params = [user_id, message_user_id];
+    "SELECT message_text FROM chat_message WHERE message_user_id = $1::int";
+  params = [user_id];
 
   pool.query(sql, params, function (err, result) {
     if (err) {
