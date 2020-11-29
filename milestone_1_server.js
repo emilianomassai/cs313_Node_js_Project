@@ -24,14 +24,14 @@ app.set("port", process.env.PORT || 5000);
 
 app.post("/getUser", getUser);
 
+// get the messages from the DB
+app.post("/getMessages", getMessages);
+
 // before log in, check if the data matches one of the users in the DB
 app.post("/checkForUser", checkForUser);
 
 // add message from user to the DB
 app.post("/addMessageToDB", addMessageToDB);
-
-// get the messages from the DB
-app.post("/getMessagesFromDB", getMessagesFromDB);
 
 // from index sign-in page, when signing in, the user access to
 // the welcome page of the chat app
@@ -84,6 +84,37 @@ function getUser(req, res) {
   // the result on the console
   getUserFromDb(user_id, function (error, result) {
     console.log("Back from the getPersonFromDb function with result: ", result);
+
+    if (error || result == null || result.length != 1) {
+      res.json("No user found in the database with id " + user_id + ".");
+
+      // to send response 500 error from the server if the user is not found:
+      // res.status(500).json({ success: false, data: "No user found!" });
+    } else {
+      res.json(result[0]);
+
+      // res.render("pages/userFound", result[0]);
+    }
+  });
+}
+
+function getMessages(req, res) {
+  console.log("Getting messages from current user ...");
+
+  // to search for user by id, we need to do the following:
+  // var user_id = req.query.user_id;
+
+  var user_id = req.body.message_user_id;
+
+  console.log("Retrieving messages with id: ", user_id);
+
+  // call the function passing the typed id and the function which displays
+  // the result on the console
+  getMessagesFromDB(user_id, function (error, result) {
+    console.log(
+      "Back from the getMessagesFromDB function with result: ",
+      result
+    );
 
     if (error || result == null || result.length != 1) {
       res.json("No user found in the database with id " + user_id + ".");
@@ -169,6 +200,29 @@ function getUserFromDb(user_id, callback) {
   });
 }
 
+function getMessagesFromDB(user_id, callback) {
+  var sql =
+    "SELECT message_text FROM chat_message WHERE message_user_id = $1::int";
+  params = [user_id];
+
+  pool.query(sql, params, function (err, result) {
+    if (err) {
+      // if an error occurred, display the error to the console, showing what
+      // and where occurred.
+      console.log("An error with the DB occurred");
+      console.log(err);
+      callback(err, null);
+    } else {
+      // display the result as string from the json string
+
+      console.log("Found DB result: " + JSON.stringify(result.rows));
+    }
+    // once we got the result from DB, we pass it to the checkForUser()
+    // function
+    callback(null, result.rows);
+  });
+}
+
 /*******************************************************************************
  * FUNCTION: checkForUserFromDb
  * This function is called from "checkForUser()". It takes the name_user and
@@ -227,30 +281,5 @@ function addMessageToDB(req, res) {
     // once we got the result from DB, we pass it to the checkForUser()
     // function
     callback(null, result.rows);
-  });
-}
-
-function getMessagesFromDB(req, res) {
-  var user_id = req.body.message_user_id;
-
-  var sql =
-    "SELECT message_text FROM chat_message WHERE message_user_id = $1::int";
-  params = [user_id];
-
-  pool.query(sql, params, function (err, result) {
-    if (err) {
-      // if an error occurred, display the error to the console, showing what
-      // and where occurred.
-      console.log("An error with the DB occurred.");
-      console.log(err);
-      callback(err, null);
-    } else {
-      // display the result as string from the json string
-
-      console.log("Found DB result: " + JSON.stringify(result.rows));
-    }
-    // once we got the result from DB, we pass it to the checkForUser()
-    // function
-    res.json(result[0]);
   });
 }
