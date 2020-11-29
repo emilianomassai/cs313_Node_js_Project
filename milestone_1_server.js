@@ -104,22 +104,22 @@ function getMessages(req, res) {
   // to search for user by id, we need to do the following:
   // var user_id = req.query.user_id;
 
-  var user_id = req.body.message_user_id;
+  var message_user_id = req.body.message_user_id;
 
-  console.log("Retrieving messages with id: ", user_id);
+  console.log("Retrieving messages with id: ", message_user_id);
 
   // call the function passing the typed id and the function which displays
   // the result on the console
-  getMessagesFromDB(user_id, function (error, result) {
+  getMessagesFromDB(message_user_id, function (error, result) {
     console.log(
       "Back from the getMessagesFromDB function with result: ",
       result
     );
 
     if (error || result == null || result.length != 1) {
-      res.json("No user found in the database with id " + user_id + ".");
-
-      res.status(508).json({ success: false, data: "No message found!" });
+      res.json(
+        "No user found in the database with id " + message_user_id + "."
+      );
 
       // to send response 500 error from the server if the user is not found:
       // res.status(500).json({ success: false, data: "No user found!" });
