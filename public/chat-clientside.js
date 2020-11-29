@@ -71,7 +71,7 @@ function searchMessages(user_id) {
 
   $.post("/getMessages", { message_user_id: user_id }, function (data) {
     console.log("Back from the server with: ");
-    console.log(pusdata);
+    console.log(data);
 
   });
 }
