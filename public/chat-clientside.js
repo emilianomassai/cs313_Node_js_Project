@@ -71,33 +71,8 @@ function searchMessages(user_id) {
 
   $.post("/getMessages", { message_user_id: user_id }, function (data) {
     console.log("Back from the server with: ");
-    console.log(data.message_text);
-    // if (!data.message_user_id) {
-    //   console.log("No message found!");
+    console.log(data);
 
-    //   $("#resultFromServer").html("No message found in the database!");
-    // } else {
-    //   console.log(data);
-
-    // var message_user_id = data.message_user_id;
-    // var message_text = data.message_text;
-
-    // 2. Getting the data back from the server ////////////////////////////////
-
-    // for loop to get elements of the list and take them out
-    // each of them as we go, to be able to display them into the html page
-
-    // 3. Using the results to update the HTML page //////////////////////////
-
-    // $("#sendMessageOutput").html(
-    //   "The messages from the DB are: " + "<br>" + "<li>" + "User ID: "
-    // +
-    //   message_user_id +
-    //   "Message: " +
-    //   message_text +
-    //   "</li>"
-    //   );
-    // }
   });
 }
 
