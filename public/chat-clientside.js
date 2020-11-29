@@ -99,6 +99,10 @@ function signInUser() {
 
           // TODO use the data.user_id to add the message to the right user
           saveMessageToDB(data.user_id, message_user);
+          displayAllMessages(data.user_id);
+
+          $("#sendMessageOutput").html();
+
           console.log(
             "Message added from user_id: " +
               data.user_id +
@@ -128,4 +132,15 @@ function saveMessageToDB(user_id, message_user) {
       // TODO use the data.user_id to add the message to the right user
     }
   );
+}
+
+function displayAllMessages(user_id) {
+  console.log(
+    "FROM displayAllMessages: retrieving all the messages from user with id: ",
+    user_id
+  );
+
+  $.post("/getMessagesFromDB", { message_user_id: user_id }, function (data) {
+    console.log(data);
+  });
 }
