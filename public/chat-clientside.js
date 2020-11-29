@@ -1,6 +1,3 @@
-var user;
-var message;
-
 function searchUser() {
   console.log("Searching user ...");
 
@@ -99,10 +96,9 @@ function signInUser() {
         } else {
           console.log("Back from the server with name user: ");
           console.log(data);
-          user = data.user_id;
-          message = message_user;
+
           // TODO use the data.user_id to add the message to the right user
-          saveMessageToDB(user, message);
+          saveMessageToDB(data.user_id, message_user);
           console.log(
             "Message added from user_id: " +
               data.user_id +
@@ -117,7 +113,7 @@ function signInUser() {
 
 function saveMessageToDB(user, message) {
   console.log(
-    "FROM saveMessageToDB : Adding to user with id ",
+    "FROM saveMessageToDB: Adding to user with id ",
     user,
     " the following message: ",
     message
