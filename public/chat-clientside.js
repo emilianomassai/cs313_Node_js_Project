@@ -140,6 +140,8 @@ function signInUser() {
 
           // TODO use the data.user_id to add the message to the right user
           saveMessageToDB(data.user_id, message_user);
+
+          // using the user id, search for all the messages in the database matching this user.
           searchMessages(data.user_id);
           console.log(
             "Message added from user_id: " +
