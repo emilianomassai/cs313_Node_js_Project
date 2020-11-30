@@ -1,4 +1,4 @@
-// require("dotenv/config"); // require the dotenv/config at beginning of file
+require("dotenv/config"); // require the dotenv/config at beginning of file
 
 var express = require("express");
 var app = express();
@@ -88,16 +88,16 @@ function getUser(req, res) {
   getUserFromDb(user_id, function (error, result) {
     console.log("Back from the getPersonFromDb function with result: ", result);
 
-    if (error || result == null || result.length != 1) {
-      res.json("No user found in the database with id " + user_id + ".");
+    // if (error || result == null || result.length != 1) {
+    //   res.json("No user found in the database with id " + user_id + ".");
 
-      // to send response 500 error from the server if the user is not found:
-      // res.status(500).json({ success: false, data: "No user found!" });
-    } else {
-      res.json(result[0]);
+    // to send response 500 error from the server if the user is not found:
+    // res.status(500).json({ success: false, data: "No user found!" });
+    // } else {
+    res.json(result[0]);
 
-      // res.render("pages/userFound", result[0]);
-    }
+    // res.render("pages/userFound", result[0]);
+    // }
   });
 }
 
