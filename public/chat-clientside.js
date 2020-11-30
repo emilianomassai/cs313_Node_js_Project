@@ -17,48 +17,48 @@ function searchUser() {
     $.post("/getUser", { user_id: user_id }, function (data) {
       console.log("Back from the server with: ");
 
-      if (!data.name_user) {
-        console.log("No user in DB");
+      // if (!data.name_user) {
+      //   console.log("No user in DB");
 
-        $("#resultFromServer").html(
-          "No user found in the database with this id!"
-        );
-      } else {
-        console.log(data);
+      //   $("#resultFromServer").html(
+      //     "No user found in the database with this id!"
+      //   );
+      // } else {
+      console.log(data);
 
-        var user_id = data.user_id;
-        var name = data.name_user;
-        var nickname = data.nickname;
-        var password = data.password;
+      var user_id = data.user_id;
+      var name = data.name_user;
+      var nickname = data.nickname;
+      var password = data.password;
 
-        // 2. Getting the data back from the server ////////////////////////////////
+      // 2. Getting the data back from the server ////////////////////////////////
 
-        // for loop to get elements of the list and take them out
-        // each of them as we go, to be able to display them into the html page
+      // for loop to get elements of the list and take them out
+      // each of them as we go, to be able to display them into the html page
 
-        // 3. Using the results to update the HTML page //////////////////////////
+      // 3. Using the results to update the HTML page //////////////////////////
 
-        $("#resultFromServer").html(
-          "An user is found in our database with the following info: " +
-            "<br>" +
-            "<li>" +
-            "Username: " +
-            name +
-            "</li>" +
-            "<li>" +
-            "Nickname: " +
-            nickname +
-            "</li>" +
-            "<li>" +
-            "Password: " +
-            password +
-            "</li>" +
-            "<li>" +
-            "User Id: " +
-            user_id +
-            "</li>"
-        );
-      }
+      $("#resultFromServer").html(
+        "An user is found in our database with the following info: " +
+          "<br>" +
+          "<li>" +
+          "Username: " +
+          name +
+          "</li>" +
+          "<li>" +
+          "Nickname: " +
+          nickname +
+          "</li>" +
+          "<li>" +
+          "Password: " +
+          password +
+          "</li>" +
+          "<li>" +
+          "User Id: " +
+          user_id +
+          "</li>"
+      );
+      // }
     });
   }
 }
