@@ -1,3 +1,6 @@
+var user;
+var message;
+
 function searchUser() {
   console.log("Searching user ...");
 
@@ -63,28 +66,6 @@ function searchUser() {
   }
 }
 
-function searchMessages(user_id) {
-  console.log(
-    "FROM searchMessages: retrieving all the messages from user with id: ",
-    user_id
-  );
-
-  $.post("/getMessages", { message_user_id: user_id }, function (messages) {
-    console.log("Back from the server with: ");
-    console.log(messages[0]);
-
-    $("#sendMessageOutput").html("");
-    // then loop through the messages received from the database
-    for (var i = 0; i < messages.length; i++) {
-      // console.log(messages[i]);
-      $("#sendMessageOutput").append(messages[i].message_text + "<br><br>");
-    }
-    // var message = data.message_text;
-
-    // $("#resultFromServer").html("Message found: " + message);
-  });
-}
-
 /****************************************************************************
  * FUNCTION: SIGN IN USER
  * This function takes the username and password prompted from the user and
@@ -121,31 +102,30 @@ function signInUser() {
 
           // TODO use the data.user_id to add the message to the right user
           saveMessageToDB(data.user_id, message_user);
-
-          // using the user id, search for all the messages in the database matching this user.
-          searchMessages(data.user_id);
           console.log(
             "Message added from user_id: " +
               data.user_id +
               " with content: " +
               message_user
           );
+          user = data.user_id;
+          message = message_user;
         }
       }
     );
   }
 }
 
-function saveMessageToDB(user_id, message_user) {
+function saveMessageToDB(user, message) {
   console.log(
     "FROM saveMessageToDB: Adding to user with id ",
-    user_id,
+    user,
     " the following message: ",
-    message_user
+    message
   );
   $.post(
     "/addMessageToDB",
-    { message_user_id: user_id, message_text: message_user },
+    { message_user_id: user, message_text: message },
     function (data) {
       console.log("From the server with name user: ");
       console.log(data);
