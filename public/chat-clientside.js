@@ -65,14 +65,23 @@ function searchUser() {
 
 function searchMessages(user_id) {
   console.log(
-    "FROM displayAllMessages: retrieving all the messages from user with id: ",
+    "FROM searchMessages: retrieving all the messages from user with id: ",
     user_id
   );
 
-  $.post("/getMessages", { message_user_id: user_id }, function (data) {
+  $.post("/getMessages", { message_user_id: user_id }, function (messages) {
     console.log("Back from the server with: ");
-    console.log(data);
+    console.log(messages[0]);
 
+    $("#sendMessageOutput").html("");
+    // then loop through the messages received from the database
+    for (var i = 0; i < messages.length; i++) {
+      // console.log(messages[i]);
+      $("#sendMessageOutput").append(messages[i].message_text + "<br><br>");
+    }
+    // var message = data.message_text;
+
+    // $("#resultFromServer").html("Message found: " + message);
   });
 }
 

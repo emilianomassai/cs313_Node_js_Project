@@ -1,3 +1,5 @@
+require("dotenv/config"); // require the dotenv/config at beginning of file
+
 var express = require("express");
 var app = express();
 
@@ -19,8 +21,9 @@ const connectionString = process.env.DATABASE_URL;
 // establish the connection to the data source, passing all the data with json:
 const pool = new Pool({ connectionString: connectionString });
 
-// set the local and environment port to connect to
-app.set("port", process.env.PORT || 5000);
+// set the environment port to connect to (the local port used is saved in .env
+//file)
+app.set("port", process.env.PORT);
 
 app.post("/getUser", getUser);
 
@@ -29,7 +32,6 @@ app.post("/getMessages", getMessages);
 
 // before log in, check if the data matches one of the users in the DB
 app.post("/checkForUser", checkForUser);
-
 
 app.post("/addMessageToDB", addMessageToDB);
 
@@ -111,23 +113,20 @@ function getMessages(req, res) {
   // call the function passing the typed id and the function which displays
   // the result on the console
   getMessagesFromDB(message_user_id, function (error, result) {
-    console.log(
-      "Back from the getMessagesFromDB function with result: ",
-      result
-    );
+    console.log("MESSAGE FROM SERVER (getMessagesFromDB) result: ", result);
 
-    if (error || result == null || result.length != 1) {
-      res.json(
-        "No user found in the database with id " + message_user_id + "."
-      );
+    // if (error || result == null || result.length != 1) {
+    //   // res.json(
+    //   //   "No user found in the database with id " + message_user_id + "."
+    //   // );
 
-      // to send response 500 error from the server if the user is not found:
-      // res.status(500).json({ success: false, data: "No user found!" });
-    } else {
-      res.json(result);
+    //   // to send response 500 error from the server if the user is not found:
+    //   // res.status(500).json({ success: false, data: "No user found!" });
+    // } else {
+    res.json(result);
 
-      // res.render("pages/userFound", result[0]);
-    }
+    // res.render("pages/userFound", result[0]);
+    // }
   });
 }
 
@@ -146,7 +145,9 @@ function getMessagesFromDB(user_id, callback) {
     } else {
       // display the result as string from the json string
 
-      console.log("Found DB result: " + JSON.stringify(result.rows));
+      console.log(
+        "Found DB result getMessagesFromDB: " + JSON.stringify(result.rows)
+      );
     }
     // once we got the result from DB, we pass it to the checkForUser()
     // function
@@ -217,7 +218,9 @@ function getUserFromDb(user_id, callback) {
     }
 
     // display the result as string from the json string
-    console.log("Found DB result: " + JSON.stringify(result.rows));
+    console.log(
+      "Found DB result getUserFromDb: " + JSON.stringify(result.rows)
+    );
 
     // once we got the result from DB, we pass it to the getUserFromDb
     // function
@@ -251,7 +254,9 @@ function checkForUserFromDb(name_user, password, callback) {
     } else {
       // display the result as string from the json string
 
-      console.log("Found DB result: " + JSON.stringify(result.rows));
+      console.log(
+        "Found DB result checkForUserFromDb: " + JSON.stringify(result.rows)
+      );
     }
     // once we got the result from DB, we pass it to the checkForUser()
     // function
@@ -266,7 +271,6 @@ function addMessageToDB(req, res) {
     "INSERT INTO chat_message(message_user_id, message_text) VALUES($1::int, $2::text)";
 
   var params = [user_id, user_message];
-
   pool.query(sql, params, function (err, result) {
     if (err) {
       // if an error occurred, display the error to the console, showing what
@@ -275,12 +279,14 @@ function addMessageToDB(req, res) {
       console.log(err);
       callback(err, null);
     }
-      // display the result as string from the json string
+    // display the result as string from the json string
 
-      console.log("Found DB result: " + JSON.stringify(result.rows));
+    console.log(
+      "Found DB result addMessageToDB: " + JSON.stringify(result.rows)
+    );
 
     // once we got the result from DB, we pass it to the checkForUser()
     // function
-    callback(null, result.rows);
+    res.json(result);
   });
 }

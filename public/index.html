@@ -51,9 +51,12 @@
     <div>
       <h1>Log In:</h1>
       <p>
-        Please enter your username, password and a message to see it displayed
-        below. If the username and password doesn't match, the message will not
-        be saved in the database.
+        Please enter your username, password and a message. If one of the forms
+        is not filled properly, the message will not be sent. Every time the
+        user is sending a message, it will be saved and all the previous
+        messages will be retrieved from the database and displayed to the html
+        with Ajax. As all the messages have relation many to many, only the
+        messages from the current user will be shown below.
       </p>
       <h4>Username</h4>
       <input type="text" id="txtUser" name="txtUser" placeholder="Username" />
