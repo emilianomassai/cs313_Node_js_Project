@@ -14,6 +14,7 @@ var params = { txtUser: "" };
 // say to the program what kind of database will be used
 const { Pool } = require("pg");
 
+NODE_TLS_REJECT_UNAUTHORIZED = "0";
 // set the database URL (using Heroku, we can just set it to the environment
 // variable)
 const connectionString = process.env.DATABASE_URL;
