@@ -1,3 +1,5 @@
+// require("dotenv/config"); // require the dotenv/config at beginning of file
+
 var express = require("express");
 var app = express();
 
@@ -19,15 +21,18 @@ const connectionString = process.env.DATABASE_URL;
 // establish the connection to the data source, passing all the data with json:
 const pool = new Pool({ connectionString: connectionString });
 
-// set the local and environment port to connect to
-app.set("port", process.env.PORT || 5000);
+// set the environment port to connect to (the local port used is saved in .env
+//file)
+app.set("port", process.env.PORT);
 
 app.post("/getUser", getUser);
+
+// get the messages from the DB
+app.post("/getMessages", getMessages);
 
 // before log in, check if the data matches one of the users in the DB
 app.post("/checkForUser", checkForUser);
 
-// add message from user to the DB
 app.post("/addMessageToDB", addMessageToDB);
 
 // from index sign-in page, when signing in, the user access to
@@ -95,6 +100,61 @@ function getUser(req, res) {
   });
 }
 
+function getMessages(req, res) {
+  console.log("Getting messages from current user ...");
+
+  // to search for user by id, we need to do the following:
+  // var user_id = req.query.user_id;
+
+  var message_user_id = req.body.message_user_id;
+
+  console.log("Retrieving messages with id: ", message_user_id);
+
+  // call the function passing the typed id and the function which displays
+  // the result on the console
+  getMessagesFromDB(message_user_id, function (error, result) {
+    console.log("MESSAGE FROM SERVER (getMessagesFromDB) result: ", result);
+
+    // if (error || result == null || result.length != 1) {
+    //   // res.json(
+    //   //   "No user found in the database with id " + message_user_id + "."
+    //   // );
+
+    //   // to send response 500 error from the server if the user is not found:
+    //   // res.status(500).json({ success: false, data: "No user found!" });
+    // } else {
+    res.json(result);
+
+    // res.render("pages/userFound", result[0]);
+    // }
+  });
+}
+
+function getMessagesFromDB(user_id, callback) {
+  var sql =
+    "SELECT message_text FROM chat_message WHERE message_user_id = $1::int";
+  params = [user_id];
+
+  pool.query(sql, params, function (err, result) {
+    if (err) {
+      // if an error occurred, display the error to the console, showing what
+      // and where occurred.
+      console.log("An error with the DB occurred");
+      console.log(err);
+      callback(err, null);
+    } else {
+      // display the result as string from the json string
+
+      console.log(
+        "Found DB result getMessagesFromDB: " + JSON.stringify(result.rows)
+      );
+    }
+    // once we got the result from DB, we pass it to the checkForUser()
+    // function
+    callback(null, result.rows);
+  });
+}
+
 /*******************************************************************************
  * FUNCTION: checkForUser
  * This function is used from "signInUser()" function when the user press the
@@ -158,7 +218,9 @@ function getUserFromDb(user_id, callback) {
     }
 
     // display the result as string from the json string
-    console.log("Found DB result: " + JSON.stringify(result.rows));
+    console.log(
+      "Found DB result getUserFromDb: " + JSON.stringify(result.rows)
+    );
 
     // once we got the result from DB, we pass it to the getUserFromDb
     // function
@@ -192,7 +254,9 @@ function checkForUserFromDb(name_user, password, callback) {
     } else {
       // display the result as string from the json string
 
-      console.log("Found DB result: " + JSON.stringify(result.rows));
+      console.log(
+        "Found DB result checkForUserFromDb: " + JSON.stringify(result.rows)
+      );
     }
     // once we got the result from DB, we pass it to the checkForUser()
     // function
@@ -200,13 +264,13 @@ function checkForUserFromDb(name_user, password, callback) {
   });
 }
 
-function addMessageToDB(message_user_id, message_text, callback) {
+function addMessageToDB(req, res) {
+  var user_id = req.body.message_user_id;
+  var user_message = req.body.message_text;
   var sql =
     "INSERT INTO chat_message(message_user_id, message_text) VALUES($1::int, $2::text)";
-  // var params = [id_user, message_text];
 
-  var params = [message_user_id, message_text];
-
+  var params = [user_id, user_message];
   pool.query(sql, params, function (err, result) {
     if (err) {
       // if an error occurred, display the error to the console, showing what
@@ -214,13 +278,15 @@ function addMessageToDB(message_user_id, message_text, callback) {
       console.log("An error with the DB occurred.");
       console.log(err);
       callback(err, null);
-    } else {
-      // display the result as string from the json string
-
-      console.log("Found DB result: " + JSON.stringify(result.rows));
     }
+    // display the result as string from the json string
+
+    console.log(
+      "Found DB result addMessageToDB: " + JSON.stringify(result.rows)
+    );
+
     // once we got the result from DB, we pass it to the checkForUser()
     // function
-    callback(null, result.rows);
+    res.json(result);
   });
 }
