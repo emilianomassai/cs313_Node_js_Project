@@ -132,7 +132,7 @@ function getMessages(req, res) {
 
 function getMessagesFromDB(user_id, callback) {
   var sql =
-    "SELECT message_text FROM chat_message WHERE message_user_id = $1::int ORDER BY message_user_id ASC;";
+    "SELECT message_text FROM chat_message WHERE message_user_id = $1::int ORDER BY message_user_id ASC";
   params = [user_id];
 
   pool.query(sql, params, function (err, result) {
