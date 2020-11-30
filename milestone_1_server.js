@@ -1,4 +1,4 @@
-// require("dotenv/config"); // require the dotenv/config at beginning of file
+require("dotenv/config"); // require the dotenv/config at beginning of file
 
 var express = require("express");
 var app = express();
