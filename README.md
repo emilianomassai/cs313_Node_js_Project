@@ -8,6 +8,8 @@ NODE_TLS_REJECT_UNAUTHORIZED='0'
 
 TODO:
 
+- Now the user can log in with username and password. If the info is correct, the user can see his information. Otherwise, the user will see and error message.
+
 - Add a field in the message table like "chat room id" to assign it to a conversation between two users
 
 DONE - Delete the message field content when the message is sent
