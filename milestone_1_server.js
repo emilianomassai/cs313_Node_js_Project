@@ -3,6 +3,21 @@ require("dotenv/config"); // require the dotenv/config at beginning of file
 var express = require("express");
 var app = express();
 
+/* SETTING THE SESSION ***************************************************/
+
+// To use the session we need to 'npm install express-session'
+var session = require("express-session");
+
+// set up sessions
+app.use(
+  session({
+    secret: "secret",
+    resave: false,
+    saveUninitialized: true,
+  })
+);
+/*************************************************************************/
+
 //import body-parser to be able to use POST instead of GET method
 var bodyParser = require("body-parser");
 
@@ -35,10 +50,6 @@ app.post("/checkForUser", checkForUser);
 
 app.post("/addMessageToDB", addMessageToDB);
 
-// from index sign-in page, when signing in, the user access to
-// the welcome page of the chat app
-app.post("/welcome_page", welcomePage);
-
 // // views is directory for all template files
 app.set("views", __dirname + "/views");
 app.set("view engine", "ejs");
@@ -46,27 +57,61 @@ app.set("view engine", "ejs");
 // folder where all the static files live
 app.use(express.static("public"));
 
+// This shows how to use a middleware function for all requests (it is defined at the end of this file)
+// Becuse it comes after the static function call, we won't see it log requests
+// for the static pages, only the ones that continue on passed that (e.g., /logout)
+app.use(logRequest);
+
+// Create a Post route for /login
+app.post("/login", handleLogin);
+
+// Create a Post route for /logout
+app.post("/logout", handleLogout);
+
 app.listen(app.get("port"), function () {
   console.log("Now listening for connections on port: ", app.get("port"));
 });
 
-/*******************************************************************************
- * FUNCTION: welcomePage
- * It checks if the username and password match one user stored in the database.
- * If so, the user is redirected to the "welcome page"
- ******************************************************************************/
-function welcomePage(req, res) {
-  // create a variable to store the information prompted from the user
-  const txtUser = req.body.txtUser;
-  const txtPassword = req.body.txtPassword;
+// Checks if the username and password match the one in the database
+// If they do, put the username on the session
+function handleLogin(req, res) {
+  console.log("Getting information from current user...");
 
-  params = { txtUser: txtUser, txtPassword: txtPassword };
+  var name = req.body.name_user;
+  var password = req.body.password;
 
-  // if (the user and password matches the prompted data from the user){}
-  res.render("pages/welcome_page", params);
-  //} else {display error res.}
+  // call the function passing the typed id and the function which displays
+  // the result on the console
+  checkForUserFromDb(name, password, function (error, result) {
+    console.log("Back from the getPersonFromDb function with result: ", result);
+
+    if (error || result == null || result.length != 1) {
+      res.json(
+        "No user found in the database with name" +
+          name +
+          " and password " +
+          password +
+          "."
+      );
+
+      // res.status(500).json({ success: false, data: "No user found!" });
+    } else {
+      res.json(result[0]);
+    }
+  });
 }
 
+//TODO TO BE DEFINED!!
+// If a user is currently stored on the session, removes it
+function handleLogout(request, response) {
+  // var result = { success: false };
+  // // We should do better error checking here to make sure the parameters are present
+  // if (request.session.user) {
+  //   request.session.destroy();
+  //   result = { success: true };
+  // }
+  // response.json(result);
+}
 /*******************************************************************************
  * FUNCTION: getUser
  * It search for an user by id and pass it to the getUserFromDb to look for the
@@ -289,4 +334,13 @@ function addMessageToDB(req, res) {
     // function
     res.json(result);
   });
+}
+
+// This middleware function simply logs the current request to the server
+function logRequest(request, response, next) {
+  // the next message will be displayed in the local terminal
+  console.log("Received a request for: " + request.url);
+
+  // don't forget to call next() to allow the next parts of the pipeline to function
+  next();
 }

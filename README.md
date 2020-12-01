@@ -10,7 +10,7 @@ TODO:
 
 - Add a field in the message table like "chat room id" to assign it to a conversation between two users
 
-- Delete the message field content when the message is sent
+DONE - Delete the message field content when the message is sent
 
 - Have a button for sign in and a button to send message
 
