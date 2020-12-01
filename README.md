@@ -15,5 +15,3 @@ TODO:
 - Have a button for sign in and a button to send message
 
 - Log in with hash and session
-
-Using my new branch

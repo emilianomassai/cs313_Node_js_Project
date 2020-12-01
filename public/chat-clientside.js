@@ -79,6 +79,9 @@ function searchMessages(user_id) {
       // console.log(messages[i]);
       $("#sendMessageOutput").append(messages[i].message_text + "<br><br>");
     }
+
+    // to clear the message textbox when the message is sent to DB
+    $("#txtMessage").val("");
     // var message = data.message_text;
 
     // $("#resultFromServer").html("Message found: " + message);
