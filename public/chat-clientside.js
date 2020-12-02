@@ -1,4 +1,4 @@
-function searchUser() {
+function logIn() {
   console.log("Searching user ...");
 
   console.log("Sign in user ...");
@@ -162,8 +162,8 @@ function searchMessages(user_id) {
  * call send the values to other functions to check if the data match to
  * the one in the database.
  ***************************************************************************/
-function signInUser() {
-  console.log("Sign in user ...");
+function sendMessage() {
+  console.log("Sending message in user ...");
 
   var name_user = $("#txtUser").val();
   var password_user = $("#txtPassword").val();

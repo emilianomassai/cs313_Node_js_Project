@@ -22,26 +22,41 @@
         height="200"
       />
 
-      <h1>Search for user:</h1>
+      <h1>Instructions:</h1>
       <p>
-        This is a demo of the chat app. In this demo you can look for an <br />
-        existing user in the database. If the user is found, the data will be
+        This is a demo of the chat app. Enter your log in information and after
+        you will be able to send messages. <br />
         <br />
-        displayed in the next page. I used POST method instead of GET. <br />
-        For do that I imported body-parser to be able to use POST.<br />
-        <br />
-
         The existing users in the chat database are from id 1 to id 4.
+        <br />
+        First User ('User Test', 'password'); <br />
+        Second User ('Bill Gates', 'Windows98'); <br />
+        Third User ('Steve Jobs', 'Leopard'); <br />
+        Forth User ('Elon Reeve Musk', 'Tesla');
+        <br />
+        <br />
       </p>
       <br />
 
-      <label for="user_id"> User Id </label>
-      <input type="text" id="user_id" name="user_id" placeholder="User Id" />
+      <!-- <label for="user_id"> User Id </label>
+      <input type="text" id="user_id" name="user_id" placeholder="User Id" /> -->
+
+      <h4>Username</h4>
+      <input type="text" id="txtUser" name="txtUser" placeholder="Username" />
+
+      <h4>Password</h4>
+
+      <input
+        type="password"
+        id="txtPassword"
+        name="txtPassword"
+        placeholder="Password"
+      />
 
       <br />
       <br />
       <br />
-      <button onclick="searchUser()">Search user</button> <br />
+      <button onclick="logIn()">Sign In</button> <br />
 
       <div>
         <ul id="resultFromServer"></ul>
@@ -59,17 +74,6 @@
         relation many to many, only the messages from the current user will be
         shown below.
       </p>
-      <h4>Username</h4>
-      <input type="text" id="txtUser" name="txtUser" placeholder="Username" />
-
-      <h4>Password</h4>
-
-      <input
-        type="password"
-        id="txtPassword"
-        name="txtPassword"
-        placeholder="Password"
-      />
 
       <h4>Message</h4>
 
@@ -84,7 +88,7 @@
       <br />
       <br />
       <br />
-      <button onclick="signInUser()">Sign In</button>
+      <button onclick="sendMessage()">Send Message</button>
 
       <button>Sign up</button>
     </div>

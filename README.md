@@ -14,6 +14,6 @@ TODO:
 
 DONE - Delete the message field content when the message is sent
 
-- Have a button for sign in and a button to send message
+DONE - Have a button for sign in and a button to send message
 
 - Log in with hash and session
