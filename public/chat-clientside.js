@@ -1,21 +1,27 @@
-function searchUser() {
+function logIn() {
   console.log("Searching user ...");
 
-  // the following is jQuery code to get the value from the text box (from
-  // index.html page) and store the value into a local variable
-  var user_id = $("#user_id").val();
-  console.log("User id: " + user_id);
+  console.log("Sign in user ...");
 
-  if (user_id == "" || isNaN(user_id)) {
-    console.log("Please enter an user id!");
-    $("#resultFromServer").html("Please enter a valid user id!");
+  var name_user = $("#txtUser").val();
+  var password = $("#txtPassword").val();
+  // var message_user = $("#txtMessage").val();
+
+  var params = {
+    name_user: name_user,
+    password: password,
+  };
+
+  if (name_user == "" || password == "") {
+    console.log("Please fill all the requested information!");
+    $("#resultFromServer").html("Please fill all the requested information!");
   } else {
-    // 1. AJAX request to the server to search ///////////////////////////////////
-    // In the same way we can do with $post() to interact with the server/////////
+    console.log("Form filled as required. Looking for some data ...");
+    console.log("Looking for", name_user, "with password", password);
 
-    // call the method getUser from milestone_1_server.js and look for an user
-    $.post("/getUser", { user_id: user_id }, function (data) {
+    $.post("/login", params, function (data) {
       console.log("Back from the server with: ");
+      console.log("loggedIn: " + data);
 
       if (!data.name_user) {
         console.log("No user in DB");
@@ -23,7 +29,7 @@ function searchUser() {
         $("#resultFromServer").html(
           "No user found in the database with this id!"
         );
-      } else {
+      } else if ((status = 200)) {
         console.log(data);
 
         var user_id = data.user_id;
@@ -39,28 +45,54 @@ function searchUser() {
         // 3. Using the results to update the HTML page //////////////////////////
 
         $("#resultFromServer").html(
-          "An user is found in our database with the following info: " +
-            "<br>" +
-            "<li>" +
-            "Username: " +
-            name +
-            "</li>" +
-            "<li>" +
-            "Nickname: " +
-            nickname +
-            "</li>" +
-            "<li>" +
-            "Password: " +
-            password +
-            "</li>" +
-            "<li>" +
-            "User Id: " +
-            user_id +
-            "</li>"
+          "Hi " + name + "," + " you are logged in. You can now send a message!"
         );
+
+        // as the user is logged in, all the messages are displayed
+        searchMessages(data.user_id);
+        // $("#resultFromServer").html(
+        //   "An user is found in our database with the following info: " +
+        //     "<br>" +
+        //     "<li>" +
+        //     "Username: " +
+        //     name +
+        //     "</li>" +
+        //     "<li>" +
+        //     "Nickname: " +
+        //     nickname +
+        //     "</li>" +
+        //     "<li>" +
+        //     "Password: " +
+        //     password +
+        //     "</li>" +
+        //     "<li>" +
+        //     "User Id: " +
+        //     user_id +
+        //     "</li>"
+        // );
       }
     });
   }
+}
+
+function logOut() {
+  console.log("Called logOut from client side!");
+  $.post("/logout", function (result) {
+    console.log("Getting back response from server: " + result);
+
+    // to clear the username, password and message when the user log out
+    $("#txtUser").val("");
+    $("#txtPassword").val("");
+    $("#txtMessage").val("");
+    // delete also all the displayed messages
+    $("#sendMessageOutput").html("");
+
+    if (result && result.success) {
+      $("#resultFromServer").text("Successfully logged out.");
+    } else {
+      $("#resultFromServer").text("You are already logged out!");
+    }
+  });
 }
 
 function searchMessages(user_id) {
@@ -79,6 +111,9 @@ function searchMessages(user_id) {
       // console.log(messages[i]);
       $("#sendMessageOutput").append(messages[i].message_text + "<br><br>");
     }
+
+    // to clear the message textbox when the message is sent to DB
+    $("#txtMessage").val("");
     // var message = data.message_text;
 
     // $("#resultFromServer").html("Message found: " + message);
@@ -91,8 +126,8 @@ function searchMessages(user_id) {
  * call send the values to other functions to check if the data match to
  * the one in the database.
  ***************************************************************************/
-function signInUser() {
-  console.log("Sign in user ...");
+function sendMessage() {
+  console.log("Sending message in user ...");
 
   var name_user = $("#txtUser").val();
   var password_user = $("#txtPassword").val();

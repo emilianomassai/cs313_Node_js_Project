@@ -1,17 +1,15 @@
 # cs313_Node_js_Project
 
-This is the repository for the project of week 10 of my cs313 class.
-
 Used the following env variable to be able to connect to Heroku DB
 
 NODE_TLS_REJECT_UNAUTHORIZED='0'
 
 TODO:
 
+- get a better session logging in system
+
+- check if user is logged in to be able to send a message.
+
 - Add a field in the message table like "chat room id" to assign it to a conversation between two users
-
-- Delete the message field content when the message is sent
-
-- Have a button for sign in and a button to send message
 
 - Log in with hash and session
