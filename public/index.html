@@ -33,8 +33,18 @@
         Second User ('Bill Gates', 'Windows98'); <br />
         Third User ('Steve Jobs', 'Leopard'); <br />
         Forth User ('Elon Reeve Musk', 'Tesla');
-        <br />
-        <br />
+      </p>
+      <br />
+
+      <h1>Log In:</h1>
+      <p>
+        Please enter your username, password and a message. If one of the forms
+        is not filled properly, the message will not be sent. Every time the
+        user is sending a message, it will be saved and all the previous
+        messages will be retrieved from the database and displayed (in
+        chronological order) to the html with Ajax. As all the messages have
+        relation many to many, only the messages from the current user will be
+        shown below.
       </p>
       <br />
 
@@ -57,6 +67,7 @@
       <br />
       <br />
       <button onclick="logIn()">Sign In</button> <br />
+      <button onclick="logOut()">Log Out</button> <br />
 
       <div>
         <ul id="resultFromServer"></ul>
@@ -64,17 +75,6 @@
     </div>
 
     <div>
-      <h1>Log In:</h1>
-      <p>
-        Please enter your username, password and a message. If one of the forms
-        is not filled properly, the message will not be sent. Every time the
-        user is sending a message, it will be saved and all the previous
-        messages will be retrieved from the database and displayed (in
-        chronological order) to the html with Ajax. As all the messages have
-        relation many to many, only the messages from the current user will be
-        shown below.
-      </p>
-
       <h4>Message</h4>
 
       <textarea
@@ -89,9 +89,8 @@
       <br />
       <br />
       <button onclick="sendMessage()">Send Message</button>
-
-      <button>Sign up</button>
     </div>
+
     <div>
       <ul id="sendMessageOutput"></ul>
     </div>

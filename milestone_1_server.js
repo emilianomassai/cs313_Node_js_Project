@@ -63,10 +63,10 @@ app.use(express.static("public"));
 app.use(logRequest);
 
 // Create a Post route for /login
-app.post("/login", handleLogin);
+app.post("/logIn", handleLogin);
 
 // Create a Post route for /logout
-app.post("/logout", handleLogout);
+app.post("/logOut", handleLogout);
 
 app.listen(app.get("port"), function () {
   console.log("Now listening for connections on port: ", app.get("port"));
@@ -96,21 +96,30 @@ function handleLogin(req, res) {
 
       // res.status(500).json({ success: false, data: "No user found!" });
     } else {
-      res.json(result[0]);
+      // to store the username into the session
+      req.session.user = name;
+
+      console.log("req.session.user: " + req.session.user);
+
+      res.status(200).json(result[0]);
     }
   });
 }
 
 //TODO TO BE DEFINED!!
 // If a user is currently stored on the session, removes it
-function handleLogout(request, response) {
-  // var result = { success: false };
-  // // We should do better error checking here to make sure the parameters are present
-  // if (request.session.user) {
-  //   request.session.destroy();
-  //   result = { success: true };
-  // }
-  // response.json(result);
+function handleLogout(req, res) {
+  console.log("Called handleLogout from server side!");
+  var result = { success: false };
+  // We should do better error checking here to make sure the parameters are present
+  if (req.session.user) {
+    console.log("req.session.user before destroying: " + req.session.user);
+
+    req.session.destroy();
+
+    result = { success: true };
+  }
+  res.json(result);
 }
 /*******************************************************************************
  * FUNCTION: getUser
