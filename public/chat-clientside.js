@@ -70,7 +70,7 @@ function logIn() {
         console.log("No user in DB");
 
         $("#resultFromServer").html(
-          "No user found in the database with this id!"
+          "User name and password do not match! Please try again."
         );
       } else if ((status = 200)) {
         console.log(data);
@@ -157,8 +157,12 @@ function sendMessage() {
   var message_user = $("#txtMessage").val();
 
   if (name_user == "" || password_user == "" || message_user == "") {
-    console.log("Please fill all the requested information!");
-    $("#sendMessageOutput").html("Please fill all the requested information!");
+    console.log(
+      "To send a message, please make sure that you are logged in and the message contain some text."
+    );
+    $("#sendMessageOutput").html(
+      "To send a message, please make sure that you are logged in and the message contain some text."
+    );
   } else {
     console.log("Form filled as required. Looking for some data ...");
     console.log("Looking for", name_user, "with password", password_user);

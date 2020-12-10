@@ -6,8 +6,6 @@ NODE_TLS_REJECT_UNAUTHORIZED='0'
 
 TODO:
 
--
-
 - get a better session logging in system
 
 - check if user is logged in to be able to send a message.

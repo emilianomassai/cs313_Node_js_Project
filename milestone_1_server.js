@@ -429,8 +429,10 @@ function checkForUserFromDb(name_user, password, callback) {
       // display the result as string from the json string
 
       // console.log("Found password from DB: " + JSON.stringify(result.rows));
-      hashedPassword = JSON.stringify(result.rows[0].password);
-      // console.log("HashedPassword from DB: " + hashedPassword);
+      if (result.rows[0]) {
+        hashedPassword = JSON.stringify(result.rows[0].password);
+        console.log("HashedPassword from DB: " + hashedPassword);
+      }
     }
     // once we got the result from DB, we pass it to the checkForUser()
     // function
@@ -451,6 +453,7 @@ function checkForUserFromDb(name_user, password, callback) {
         throw err;
       } else if (!isMatch) {
         console.log("Password doesn't match!");
+        callback(err, null);
       } else {
         console.log("Password matches!");
         // parameters saved as array
