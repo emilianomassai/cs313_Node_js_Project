@@ -28,9 +28,13 @@ function signUp() {
       console.log("loggedIn: " + data);
 
       if (!data.name_user) {
-        console.log("No user in DB");
+        console.log("ADDED NEW USER!");
+        $("#newUserErrorMessage").html(
+          "The new user has been successfully created! Please log in to use the app."
+        );
       } else if ((status = 200)) {
         console.log(data);
+        console.log("THIS USER IS ALREADY EXISTING!");
 
         var user_id = data.user_id;
         var name = data.name_user;
