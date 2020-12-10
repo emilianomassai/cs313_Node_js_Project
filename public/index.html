@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="./style.css" />
 
     <script src="./chat-clientside.js"></script>
 
@@ -27,7 +28,7 @@
         This is a demo of the chat app. Enter your log in information and after
         you will be able to send messages. <br />
         <br />
-        The existing users in the chat database are from id 1 to id 4.
+        The following is the list of the existing users in the database:
         <br />
         First User ('User Test', 'password'); <br />
         Second User ('Bill Gates', 'Windows98'); <br />
@@ -35,9 +36,10 @@
         Forth User ('Elon Reeve Musk', 'Tesla');
       </p>
       <br />
+      <h3>NEW FEATURE:</h3>
       <p>
-        <h3>NEW FEATURE:</h3>  You can now create a new account. The user will be stored
-        in the DB, with hashed password (using bcrypt library).
+        You can now create a new account. The user will be stored in the DB,
+        with hashed password (using bcrypt library).
       </p>
 
       <h1>Create Account:</h1>
@@ -82,7 +84,10 @@
         shown below.
       </p>
       <br />
-      <p>If you inspect the page from the browser, you can see the "console.log" message with the hashed password when you log in with your new account.</p>
+      <p>
+        If you inspect the page from the browser, you can see the "console.log"
+        message with the hashed password when you log in with your new account.
+      </p>
 
       <!-- <label for="user_id"> User Id </label>
       <input type="text" id="user_id" name="user_id" placeholder="User Id" /> -->
