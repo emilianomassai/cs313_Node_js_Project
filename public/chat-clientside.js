@@ -1,3 +1,46 @@
+function signUp() {
+  console.log("Adding new user to database ...");
+
+  // getting the values from the user form...
+  var newUser = $("#newUser").val();
+  var newPassword = $("#newPassword").val();
+  var newNickname = $("#newNickname").val();
+
+  // .. get ready for send the new values to the server
+  var params = {
+    newUser: newUser,
+    newPassword: newPassword,
+    newNickname: newNickname,
+  };
+  if (newUser == "" || newPassword == "" || newNickname == "") {
+    console.log(
+      "You need to fill all the requested information to create a new account!"
+    );
+    $("#newUserErrorMessage").html(
+      "You need to fill all the requested information to create a new account!"
+    );
+  } else {
+    console.log(
+      "The user filled the fields correctly. Checking if all the info are correct and if there isn't another user with the same name in the DB..."
+    );
+    $.post("/signUp", params, function (data) {
+      console.log("Back from the server with: ");
+      console.log("loggedIn: " + data);
+
+      if (!data.name_user) {
+        console.log("No user in DB");
+      } else if ((status = 200)) {
+        console.log(data);
+
+        var user_id = data.user_id;
+        var name = data.name_user;
+        var nickname = data.nickname;
+        var password = data.password;
+      }
+    });
+  }
+}
+
 function logIn() {
   console.log("Searching user ...");
 
@@ -50,26 +93,6 @@ function logIn() {
 
         // as the user is logged in, all the messages are displayed
         searchMessages(data.user_id);
-        // $("#resultFromServer").html(
-        //   "An user is found in our database with the following info: " +
-        //     "<br>" +
-        //     "<li>" +
-        //     "Username: " +
-        //     name +
-        //     "</li>" +
-        //     "<li>" +
-        //     "Nickname: " +
-        //     nickname +
-        //     "</li>" +
-        //     "<li>" +
-        //     "Password: " +
-        //     password +
-        //     "</li>" +
-        //     "<li>" +
-        //     "User Id: " +
-        //     user_id +
-        //     "</li>"
-        // );
       }
     });
   }

@@ -35,6 +35,41 @@
         Forth User ('Elon Reeve Musk', 'Tesla');
       </p>
       <br />
+      <p>
+        <h3>NEW FEATURE:</h3>  You can now create a new account. The user will be stored
+        in the DB, with hashed password (using bcrypt library).
+      </p>
+
+      <h1>Create Account:</h1>
+      <p>
+        If this is your first time using this chat application, please create a
+        new account for free.
+      </p>
+      <h4>Username</h4>
+      <input type="text" id="newUser" name="newUser" placeholder="Username" />
+      <h4>Password</h4>
+      <input
+        type="text"
+        id="newPassword"
+        name="newPassword"
+        placeholder="Password"
+      />
+      <h4>Nickname</h4>
+      <input
+        type="text"
+        id="newNickname"
+        name="newNickname"
+        placeholder="Nickname"
+      />
+      <br />
+      <br />
+      <br />
+      <button onclick="signUp()">Sign Up</button> <br />
+
+      <div>
+        <ul id="newUserErrorMessage"></ul>
+      </div>
+      <br />
 
       <h1>Log In:</h1>
       <p>
@@ -78,7 +113,7 @@
       <h4>Message</h4>
 
       <textarea
-        placeholder="Your message here ..."
+        placeholder="Type a message..."
         name="txtMessage"
         id="txtMessage"
         cols="50"

@@ -6,10 +6,10 @@ NODE_TLS_REJECT_UNAUTHORIZED='0'
 
 TODO:
 
+-
+
 - get a better session logging in system
 
 - check if user is logged in to be able to send a message.
 
 - Add a field in the message table like "chat room id" to assign it to a conversation between two users
-
-- Log in with hash and session

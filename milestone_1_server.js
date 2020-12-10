@@ -3,6 +3,9 @@ require("dotenv/config"); // require the dotenv/config at beginning of file
 var express = require("express");
 var app = express();
 
+// to be able to store hashed passwords
+var bcrypt = require("bcrypt");
+
 /* SETTING THE SESSION ***************************************************/
 
 // To use the session we need to 'npm install express-session'
@@ -62,6 +65,10 @@ app.use(express.static("public"));
 // for the static pages, only the ones that continue on passed that (e.g., /logout)
 app.use(logRequest);
 
+app.post("/signUp", handleSignup);
+
+app.post("/addNewUserToDB", addNewUserToDB);
+
 // Create a Post route for /login
 app.post("/logIn", handleLogin);
 
@@ -72,6 +79,123 @@ app.listen(app.get("port"), function () {
   console.log("Now listening for connections on port: ", app.get("port"));
 });
 
+// check if the information given from the user are available to create a new account. If so, add the user and all the info into the DB
+function handleSignup(req, res) {
+  var newUser = req.body.newUser;
+  var newPassword = req.body.newPassword;
+  var newNickname = req.body.newNickname;
+
+  checkForExistingUser(
+    newUser,
+    newPassword,
+    newNickname,
+    function (error, result) {
+      console.log(
+        "Back from the getPersonFromDb function with result: ",
+        result
+      );
+      // no user found in the DB, so we can add a new user from here
+      if (error || result == null || result.length != 1) {
+        console.log(
+          "No user has been found. We can now add the information to the DB! The user added will be: " +
+            newUser +
+            " " +
+            newPassword +
+            " " +
+            newNickname
+        );
+
+        addNewUserToDB(
+          newUser,
+          newPassword,
+          newNickname,
+          function (error, result) {
+            if (error || result == null || result.length != 1) {
+              res.json(
+                "Unable to create a new user " +
+                  "with name " +
+                  newUser +
+                  " password " +
+                  newPassword +
+                  " and nickname " +
+                  newNickname +
+                  "."
+              );
+
+              // res.status(500).json({ success: false, data: "No user found!" });
+            } else {
+              res.json(result[0]);
+            }
+          }
+        );
+
+        // if the user is already existing, send an error message to the user
+      } else {
+        console.log("The user is already existing! We can't add it to the DB!");
+      }
+    }
+  );
+}
+
+// check in the DB an user with the given name and nickname is already existing. If not, add it to the DB.
+function checkForExistingUser(newUser, newPassword, newNickname, callback) {
+  var sql =
+    "SELECT user_id, name_user, nickname FROM chat_user WHERE name_user = $1 OR nickname = $2";
+
+  // parameters saved as array
+  var params = [newUser, newNickname];
+
+  // postgres module, please go and run this query (sql) with this parameters (params) and when is done call the callback function
+  pool.query(sql, params, function (err, result) {
+    if (err) {
+      // if an error occurred, display the error to the console, showing what
+      // and where occurred.
+      console.log("An error with the DB occurred");
+      console.log(err);
+      callback(err, null);
+    } else {
+      // display the result as string from the json string
+
+      console.log(
+        "Found DB result checkForUserFromDb: " + JSON.stringify(result.rows)
+      );
+    }
+    // once we got the result from DB, we pass it to the checkForUser()
+    // function
+    callback(null, result.rows);
+  });
+}
+
+function addNewUserToDB(newUser, newPassword, newNickname, callback) {
+  const hashedPassword = bcrypt.hashSync(newPassword, 10);
+
+  var sql =
+    "INSERT INTO chat_user(name_user, password, nickname) VALUES($1::text, $2::text, $3::text)";
+
+  var params = [newUser, hashedPassword, newNickname];
+
+  // var params = [newUser, newPassword, newNickname];
+
+  pool.query(sql, params, function (err, result) {
+    if (err) {
+      // if an error occurred, display the error to the console, showing what
+      // and where occurred.
+      console.log("An error with the DB occurred.");
+      console.log(err);
+      callback(err, null);
+    }
+    // display the result as string from the json string
+
+    console.log(
+      "Found DB result addMessageToDB: " + JSON.stringify(result.rows)
+    );
+
+    // once we got the result from DB, we pass it to the checkForUser()
+    // function
+    callback(null, result.rows);
+  });
+}
+
 // Checks if the username and password match the one in the database
 // If they do, put the username on the session
 function handleLogin(req, res) {
@@ -79,7 +203,7 @@ function handleLogin(req, res) {
 
   var name = req.body.name_user;
   var password = req.body.password;
-
+  // bcrypt.compare(password, hash);
   // call the function passing the typed id and the function which displays
   // the result on the console
   checkForUserFromDb(name, password, function (error, result) {
@@ -291,14 +415,10 @@ function getUserFromDb(user_id, callback) {
  ******************************************************************************/
 function checkForUserFromDb(name_user, password, callback) {
   // select from the database the correct user
-  var sql =
-    "SELECT user_id, name_user, password, nickname FROM chat_user WHERE name_user = $1 AND password = $2";
-
-  // parameters saved as array
-  var params = [name_user, password];
-
-  // postgres module, please go and run this query (sql) with this parameters (params) and when is done call the callback function
-  pool.query(sql, params, function (err, result) {
+  var sqlPassword = "SELECT password FROM chat_user WHERE name_user = $1";
+  var passwordParameter = [name_user];
+  var hashedPassword = "";
+  pool.query(sqlPassword, passwordParameter, function (err, result) {
     if (err) {
       // if an error occurred, display the error to the console, showing what
       // and where occurred.
@@ -308,13 +428,56 @@ function checkForUserFromDb(name_user, password, callback) {
     } else {
       // display the result as string from the json string
 
-      console.log(
-        "Found DB result checkForUserFromDb: " + JSON.stringify(result.rows)
-      );
+      // console.log("Found password from DB: " + JSON.stringify(result.rows));
+      hashedPassword = JSON.stringify(result.rows[0].password);
+      // console.log("HashedPassword from DB: " + hashedPassword);
     }
     // once we got the result from DB, we pass it to the checkForUser()
     // function
-    callback(null, result.rows);
+
+    var sql =
+      "SELECT user_id, name_user, password, nickname FROM chat_user WHERE name_user = $1 AND password = $2";
+
+    // here I need to remove the "" of the hashed password which I get from the DB
+    var string1 = hashedPassword.replace('"', "");
+    var string2 = string1.replace('"', "");
+    console.log("HashedPassword from DB: " + string2);
+    console.log("password from user: " + password);
+
+    // then, with only the hashed value of the password, I can use the
+    // bcrypt.compare method
+    bcrypt.compare(password, string2, function (err, isMatch) {
+      if (err) {
+        throw err;
+      } else if (!isMatch) {
+        console.log("Password doesn't match!");
+      } else {
+        console.log("Password matches!");
+        // parameters saved as array
+        var params = [name_user, string2];
+
+        // postgres module, please go and run this query (sql) with this parameters (params) and when is done call the callback function
+        pool.query(sql, params, function (err, result) {
+          if (err) {
+            // if an error occurred, display the error to the console, showing what
+            // and where occurred.
+            console.log("An error with the DB occurred");
+            console.log(err);
+            callback(err, null);
+          } else {
+            // display the result as string from the json string
+
+            console.log(
+              "Found DB result checkForUserFromDb: " +
+                JSON.stringify(result.rows)
+            );
+          }
+          // once we got the result from DB, we pass it to the checkForUser()
+          // function
+          callback(null, result.rows);
+        });
+      }
+    });
   });
 }
 
