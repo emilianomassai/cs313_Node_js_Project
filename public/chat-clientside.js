@@ -92,7 +92,7 @@ function logIn() {
         // 3. Using the results to update the HTML page //////////////////////////
 
         $("#resultFromServer").html(
-          "Hi " + name + "," + " you are logged in. You can now send a message!"
+          "Hi " + name + "," + " you are logged in. You can now write a note!"
         );
 
         // as the user is logged in, all the messages are displayed
@@ -162,10 +162,10 @@ function sendMessage() {
 
   if (name_user == "" || password_user == "" || message_user == "") {
     console.log(
-      "To send a message, please make sure that you are logged in and the message contain some text."
+      "To save a note, please make sure that you are logged in and the note contain some text."
     );
     $("#sendMessageOutput").html(
-      "To send a message, please make sure that you are logged in and the message contain some text."
+      "To save a note, please make sure that you are logged in and the note contain some text."
     );
   } else {
     console.log("Form filled as required. Looking for some data ...");
@@ -179,7 +179,7 @@ function sendMessage() {
           console.log("The current user is not signed in!");
 
           $("#sendMessageOutput").html(
-            "Please enter your username and password to be able to send a message!"
+            "Please enter your username and password to be able to save a note!"
           );
         } else {
           console.log("Back from the server with name user: ");
@@ -191,7 +191,7 @@ function sendMessage() {
           // using the user id, search for all the messages in the database matching this user.
           searchMessages(data.user_id);
           console.log(
-            "Message added from user_id: " +
+            "Note added from user_id: " +
               data.user_id +
               " with content: " +
               message_user
@@ -206,7 +206,7 @@ function saveMessageToDB(user_id, message_user) {
   console.log(
     "FROM saveMessageToDB: Adding to user with id ",
     user_id,
-    " the following message: ",
+    " the following note: ",
     message_user
   );
   $.post(

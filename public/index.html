@@ -9,24 +9,26 @@
 
     <script src="./chat-clientside.js"></script>
 
-    <link rel="icon" type="image/ico" href="./images/Messenger.png" />
-    <title>Messenger</title>
+    <link rel="icon" type="image/ico" href="./images/Note_App.png" />
+    <title>Notes</title>
   </head>
 
   <body>
     <div>
       <img
-        src="./images/Messenger.png"
+        src="./images/Note_App.png"
         alt="messenger_icon"
         id="messenger_icon"
         width="200"
         height="200"
       />
 
-      <h1>Instructions:</h1>
+      <h1>NOTES</h1>
+
+      <h2>Instructions:</h2>
       <p>
-        This is a demo of the chat app. Enter your log in information and after
-        you will be able to send messages. <br />
+        This is a demo of the Note app. Enter your log in information and after
+        you will be able to save notes. <br />
         <br />
         The following is the list of the existing users in the database:
         <br />
@@ -42,7 +44,7 @@
         with hashed password (using bcrypt library).
       </p>
 
-      <h1>Create Account:</h1>
+      <h2>Create Account:</h2>
       <p>
         If this is your first time using this chat application, please create a
         new account for free.
@@ -73,15 +75,14 @@
       </div>
       <br />
 
-      <h1>Log In:</h1>
+      <h2>Log In:</h2>
       <p>
-        Please enter your username, password and a message. If one of the forms
-        is not filled properly, the message will not be sent. Every time the
-        user is sending a message, it will be saved and all the previous
-        messages will be retrieved from the database and displayed (in
-        chronological order) to the html with Ajax. As all the messages have
-        relation many to many, only the messages from the current user will be
-        shown below.
+        Please enter your username, password and a note. If one of the forms is
+        not filled properly, the note will not be saved. Every time the user is
+        sending a note, it will be saved and all the previous notes will be
+        retrieved from the database and displayed (in chronological order) to
+        the html with Ajax. As all the notes have relation many to many, only
+        the notes from the current user will be shown below.
       </p>
       <br />
       <p>
@@ -116,10 +117,10 @@
     </div>
 
     <div>
-      <h4>Message</h4>
+      <h4>Note</h4>
 
       <textarea
-        placeholder="Type a message..."
+        placeholder="Enter your note..."
         name="txtMessage"
         id="txtMessage"
         cols="50"
@@ -129,7 +130,7 @@
       <br />
       <br />
       <br />
-      <button onclick="sendMessage()">Send Message</button>
+      <button onclick="sendMessage()">Save Note</button>
     </div>
 
     <div>
