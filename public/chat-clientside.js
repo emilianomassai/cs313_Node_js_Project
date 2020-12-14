@@ -1,3 +1,5 @@
+var user_id;
+var numberOfMessages = 0;
 function signUp() {
   console.log("Adding new user to database ...");
 
@@ -36,7 +38,7 @@ function signUp() {
         console.log(data);
         console.log("THIS USER IS ALREADY EXISTING!");
 
-        var user_id = data.user_id;
+        user_id = data.user_id;
         var name = data.name_user;
         var nickname = data.nickname;
         var password = data.password;
@@ -79,7 +81,7 @@ function logIn() {
       } else if ((status = 200)) {
         console.log(data);
 
-        var user_id = data.user_id;
+        user_id = data.user_id;
         var name = data.name_user;
         var nickname = data.nickname;
         var password = data.password;
@@ -137,6 +139,7 @@ function searchMessages(user_id) {
     for (var i = 0; i < messages.length; i++) {
       // console.log(messages[i]);
       $("#sendMessageOutput").append(messages[i].message_text + "<br><br>");
+      numberOfMessages = messages.length;
     }
 
     // to clear the message textbox when the message is sent to DB
@@ -147,11 +150,61 @@ function searchMessages(user_id) {
   });
 }
 
+// TODO
+function deleteMessages() {
+  if (user_id) {
+    searchMessages(user_id);
+    console.log("numberOfMessages: " + numberOfMessages);
+    if (numberOfMessages > 0) {
+      console.log(
+        "Trying to delete all the messages of the user with id: " +
+          user_id +
+          "from the DB ..."
+      );
+
+      if (
+        confirm(
+          "You are about to delete your " +
+            numberOfMessages +
+            " notes. Are you sure?"
+        )
+      ) {
+        // Delete all notes!
+        $.post(
+          "/deleteAllMessages",
+          { message_user_id: user_id },
+          function (messages) {
+            $("#sendMessageOutput").html("");
+          }
+        );
+        numberOfMessages = 0;
+        console.log("All messages deleted!");
+      } else {
+        // Do nothing!
+        console.log("No message deleted!");
+      }
+      // Brainstorm
+      // 1) to delete one message:
+      // copy and paste the whole content of a message
+
+      // 2) to delete all messages:
+      // DELETE FROM Messages WHERE user_id is the current user
+    }
+  }
+}
+
+function modifyMessages() {
+  console.log("Trying to modify the messages from the DB ...");
+  // Brainstorm
+  // 1) to modify one message:
+  // copy and paste the whole content of a message
+}
+
 /****************************************************************************
- * FUNCTION: SIGN IN USER
- * This function takes the username and password prompted from the user and
- * call send the values to other functions to check if the data match to
- * the one in the database.
+ * FUNCTION: sendMessage
+ * This function takes the username, password and message prompted from
+ * the user and call send the values to other functions to check if the data
+ * match to the one in the database.
  ***************************************************************************/
 function sendMessage() {
   console.log("Sending message in user ...");
@@ -215,7 +268,6 @@ function saveMessageToDB(user_id, message_user) {
     function (data) {
       console.log("From the server with name user: ");
       console.log(data);
-
       // TODO use the data.user_id to add the message to the right user
     }
   );

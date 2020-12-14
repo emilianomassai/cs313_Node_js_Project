@@ -4,7 +4,15 @@ Used the following env variable to be able to connect to Heroku DB
 
 NODE_TLS_REJECT_UNAUTHORIZED='0'
 
-TODO:
+BUGS:
+
+- after deleting notes, the button delete show again the same number of notes if pressed again
+
+  TODO:
+
+- modify notes
+
+- delete notes
 
 - get a better session logging in system
 

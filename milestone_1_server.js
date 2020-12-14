@@ -48,6 +48,8 @@ app.post("/getUser", getUser);
 // get the messages from the DB
 app.post("/getMessages", getMessages);
 
+app.post("/deleteAllMessages", deleteAllMessages);
+
 // before log in, check if the data matches one of the users in the DB
 app.post("/checkForUser", checkForUser);
 
@@ -331,6 +333,38 @@ function getMessagesFromDB(user_id, callback) {
     // function
     callback(null, result.rows);
   });
+}
+
+function deleteAllMessages(req, res) {
+  var message_user_id = req.body.message_user_id;
+
+  deleteAllMessagesFromDB(message_user_id, function (error, result) {
+    res.json(result);
+  });
+}
+
+function deleteAllMessagesFromDB(user_id, callback) {
+  if (user_id) {
+    var sql = "DELETE FROM chat_message WHERE message_user_id = $1::int";
+    params = [user_id];
+    pool.query(sql, params, function (err, result) {
+      if (err) {
+        // if an error occurred, display the error to the console, showing what
+        // and where occurred.
+        console.log("An error with the DB occurred");
+        console.log(err);
+        callback(err, null);
+      } else {
+        // display the result as string from the json string
+        // console.log("Deleted notes!" + JSON.stringify(result.rows));
+      }
+      // once we got the result from DB, we pass it to the checkForUser()
+      // function
+      callback(null, result.rows);
+    });
+  } else {
+    console.log("No user is logged in!");
+  }
 }
 
 /*******************************************************************************
